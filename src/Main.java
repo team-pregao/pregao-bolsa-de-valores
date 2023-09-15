@@ -1,55 +1,27 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         // Criar uma bolsa de valores
-        Bolsa bolsa = new Bolsa();
-        bolsa.setNome("Bolsa de Valores XYZ");
+        Bolsa bolsa = new Bolsa("Bolsa de Valores XYZ");
 
         // Criar uma corretora
-        Corretora corretora = new Corretora();
-        corretora.setNome("Corretora ABC");
+        Corretora corretora = new Corretora("Corretora ABC");
 
         // Criar um investidor
-        Investidor investidor = new Investidor("Investidor 1", 1);
+        Investidor investidor = new Investidor("Investidor 1", 1, corretora);
+        investidor.transferir(100000);
 
         // Criar uma carteira para o investidor
         Carteira carteira = new Carteira();
-        investidor.getCarteiras().add(carteira);
+        investidor.getCorretora().setCarteira(carteira);
 
         // Adicionar alguns ativos à carteira do investidor
-        Ativo ativo1 = new Ativo();
-        ativo1.setCodigo("AAPL");
-        ativo1.setNome("Apple Inc.");
-        ativo1.setTipo("Ação");
-        ativo1.setValorAtual(150.0f);
+        Ativo ativo1 = new Ativo("AAPL", "Apple Inc.", "Ação", 150.0);
 
-        Ativo ativo2 = new Ativo();
-        ativo2.setCodigo("GOOGL");
-        ativo2.setNome("Alphabet Inc.");
-        ativo2.setTipo("Ação");
-        ativo2.setValorAtual(2500.0f);
+        Ativo ativo2 = new Ativo("GOOGL", "Alphabet Inc.", "Ação", 2500.0);
 
-        carteira.getAtivos().add(ativo1);
-        carteira.getAtivos().add(ativo2);
-
-        // Realizar uma compra de ações
-        Historico compra = new Historico();
-        compra.setAtivo(ativo1);
-        compra.setQuantidade(10);
-        compra.setValor(160.0f);
-        compra.setTipo("Compra");
-
-        // Adicionar o histórico de compra à carteira do investidor
-        carteira.getHistorico().add(compra);
-
-        // Simular uma venda de ações
-        Historico venda = new Historico();
-        venda.setAtivo(ativo1);
-        venda.setQuantidade(5);
-        venda.setValor(170.0f);
-        venda.setTipo("Venda");
-
-        // Adicionar o histórico de venda à carteira do investidor
-        carteira.getHistorico().add(venda);
+        investidor.comprarAcao(ativo1, 10);
+        investidor.comprarAcao(ativo2, 20);
+        investidor.venderAcao(ativo2, 5);
 
         // Exibir o histórico de transações na carteira do investidor
         System.out.println("Histórico de Transações da Carteira de " + investidor.getNome() + ":");
@@ -59,5 +31,6 @@ public class Main {
                     ", Quantidade: " + transacao.getQuantidade() +
                     ", Valor: " + transacao.getValor());
         }
+        System.out.println("Saldo atual: " + investidor.getSaldo());
     }
 }

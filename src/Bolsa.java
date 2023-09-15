@@ -1,10 +1,12 @@
 public class Bolsa {
-    private String nome;
+    private final String nome;
+
+    public Bolsa(String nome) {
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 }
 
