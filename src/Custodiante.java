@@ -22,7 +22,7 @@ public class Custodiante {
     public void ListaEncadeadaarAtivosCustodiados() {
         System.out.println("Ativos custodiados por " + nome + ":");
         for (Ativo ativo : ativosCustodiados) {
-            System.out.println("Código: " + ativo.getCodigo() + ", Nome: " + ativo.getNome());
+            System.out.println("Código: " + ativo.getTicker() + ", Nome: " + ativo.getTicker());
         }
     }
 }

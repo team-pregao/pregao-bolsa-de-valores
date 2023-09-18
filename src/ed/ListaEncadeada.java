@@ -12,16 +12,17 @@ public class ListaEncadeada<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
+            No currenteNode = head;
             @Override
             public boolean hasNext() {
-                return head != null;
+                return currenteNode != null;
             }
 
             @Override
             public T next() {
                 if (hasNext()){
-                    T data = head.dado;
-                    head = head.no;
+                    T data = currenteNode.dado;
+                    currenteNode = currenteNode.no;
                     return data;
                 } else {
                     throw new NoSuchElementException();

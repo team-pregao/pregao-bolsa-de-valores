@@ -1,11 +1,11 @@
 package ed;
-/*
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-*/
+
 class ListaEncadeadaTest {
-/*
+
     @Test
     void addTest() {
         ListaEncadeada<Integer> list = new ListaEncadeada<>();
@@ -15,6 +15,18 @@ class ListaEncadeadaTest {
         list.add(2, 9);
         list.add(3, 7);
         list.add(5, 6);
+        System.out.println(list);
+        assertEquals(list.toString(), "{ 2  3  9  7  4  6 }");
+    }
+    @Test
+    void addStringTest() {
+        ListaEncadeada<String> list = new ListaEncadeada<>();
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add(2, "9");
+        list.add(3, "7");
+        list.add(5, "6");
         System.out.println(list);
         assertEquals(list.toString(), "{ 2  3  9  7  4  6 }");
     }
@@ -51,5 +63,5 @@ class ListaEncadeadaTest {
         assertEquals(list.get(5), 7);
         assertNull(list.get(16));
     }
-*/
+
 }
