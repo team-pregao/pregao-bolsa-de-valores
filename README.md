@@ -24,7 +24,8 @@ A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de v
 
     Custodiante: Responsável pela guarda e garantia dos ativos negociados.
 
-
+### 💻 Protótipos da Interface
+[Link para projeto Whimscal](https://whimsical.com/pregaobolsa-TKJB2CDY9S8wpFh9HEbq84)
 
 ### 👥 Colaboradores
 
