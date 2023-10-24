@@ -1,6 +1,6 @@
 ## 💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
 
-## Colaboradores
+## 👥 Colaboradores
 
 <a href="https://github.com/Andre-06">
   <img src="https://avatars.githubusercontent.com/u/60292382?v=4" alt="GitHub" style="width:40px; height:40px;" />
