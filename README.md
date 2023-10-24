@@ -10,7 +10,7 @@ Adicionalmente, será definida uma estrutura de arquivos e um layout específico
 
 ### 📇 Entidades 
 
-A aplicação permite o cadastro de diversas entidades relacionadas ao mercado financeiro, tais como:
+A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de valores, tais como:
 
     Investidores: Clientes de corretoras que enviam ordens de compra e venda de ativos.
 
