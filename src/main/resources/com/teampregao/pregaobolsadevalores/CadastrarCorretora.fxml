@@ -12,11 +12,12 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   fx:controller="com.teampregao.pregaobolsadevalores.controllers"
    <children>
       <VBox layoutX="27.0" layoutY="-2.0" prefHeight="807.0" prefWidth="211.0">
          <children>
             <Region prefHeight="701.0" prefWidth="211.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE" onAction="#onActionCadastrarCorretora">
                <font>
                   <Font name="System Bold Italic" size="19.0" />
                </font>
@@ -49,9 +50,9 @@
                   <Font name="System Bold Italic" size="12.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" prefHeight="40.0" prefWidth="35.0" />
+            <TextField alignment="CENTER" prefHeight="40.0" prefWidth="35.0" fx:id="txfNome"/>
             <Region prefHeight="45.0" prefWidth="387.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="388.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="388.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR" textFill="WHITE" onAction="#onActionCadastrarCorretora">
                <font>
                   <Font name="System Bold Italic" size="17.0" />
                </font>

@@ -12,6 +12,7 @@
 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #c3cfd9;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  fx:controller="com.teampregao.pregaobolsadevalores.controllers"
    <children>
       <VBox alignment="TOP_CENTER" layoutX="348.0" layoutY="-4.0" prefHeight="808.0" prefWidth="300.0">
          <children>
@@ -27,11 +28,11 @@
                </image>
             </ImageView>
             <Region prefHeight="32.0" prefWidth="304.0" />
-            <TextField prefHeight="40.0" prefWidth="304.0" promptText="Seu Nome" style="-fx-background-color: #ffffff;" />
+            <TextField prefHeight="40.0" prefWidth="304.0" promptText="Seu Nome" style="-fx-background-color: #ffffff;" fx:id="txfSeuNome"/>
             <Region prefHeight="23.0" prefWidth="304.0" />
-            <TextField prefHeight="40.0" prefWidth="304.0" promptText="Sua Corretora" style="-fx-background-color: #ffffff;" />
+            <TextField prefHeight="40.0" prefWidth="304.0" promptText="Sua Corretora" style="-fx-background-color: #ffffff;" fx:id="txfSuaCorretora"/>
             <Region prefHeight="25.0" prefWidth="310.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="319.0" style="-fx-background-color: #6558f5;" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="319.0" style="-fx-background-color: #6558f5;" text="Button" onAction="#onActionUserRegistration"/>
          </children>
       </VBox>
    </children>

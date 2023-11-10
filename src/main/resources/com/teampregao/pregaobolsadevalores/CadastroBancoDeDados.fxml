@@ -11,6 +11,7 @@
 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  fx:controller="com.teampregao.pregaobolsadevalores.controllers"
    <children>
       <VBox alignment="TOP_CENTER" layoutX="368.0" prefHeight="800.0" prefWidth="262.0">
          <children>
@@ -24,19 +25,19 @@
                </VBox.margin>
             </ImageView>
             <Region prefHeight="72.0" prefWidth="262.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR INVESTIDOR" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR INVESTIDOR" textFill="WHITE" onAction="#onActionCadastrarBancoDeDados">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
             <Region prefHeight="72.0" prefWidth="262.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR CORRETORA" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR CORRETORA" textFill="WHITE" onAction="#onActionCadastrarBancoDeDados">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
             <Region prefHeight="72.0" prefWidth="262.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR EMPRESA" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="271.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR EMPRESA" textFill="WHITE" onAction="#onActionCadastrarBancoDeDados">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
@@ -46,7 +47,7 @@
       <VBox layoutX="774.0" prefHeight="800.0" prefWidth="160.0">
          <children>
             <Region prefHeight="661.0" prefWidth="160.0" />
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: #6558f5;" text="SIMULAÇÃO" textFill="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" style="-fx-background-color: #6558f5;" text="SIMULAÇÃO" textFill="WHITE" onAction="#onActionCadastrarBancoDeDados"/>
          </children>
       </VBox>
    </children>
