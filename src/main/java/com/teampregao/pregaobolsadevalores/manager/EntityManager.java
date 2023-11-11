@@ -258,7 +258,7 @@ public class EntityManager{
     public static String lineHistorico(Historico historico) {
         return intField(historico.getId().getId(), 3) +
                 intField(historico.getAtivo().getId().getId(), 3) +
-                doubleField(historico.getQuantidade(), 5) +
+                doubleField(historico.getQuantidade(), 12) +
                 doubleField(historico.getValor(), 12) +
                 intField(historico.getTipo(), 1) +
                 stringField(historico.getHorarioDaTransacao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 19) +
@@ -273,14 +273,14 @@ public class EntityManager{
         ListaEncadeada<Historico> historicoLista = new ListaEncadeada<>();
 
         while (resultSet.length() >= Type.HISTORICO.maxLenght) {
-            int id = Integer.parseInt(resultSet.substring(0, 3));
-            int ativoId = Integer.parseInt(resultSet.substring(3, 6));
-            double quantidade = Double.parseDouble(resultSet.substring(6, 18));
-            double valor = Double.parseDouble(resultSet.substring(18, 30));
-            int tipo = Integer.parseInt(resultSet.substring(30, 31));
-            String horarioDaTransacao = resultSet.substring(31, 49);
-            int investidorId = Integer.parseInt(resultSet.substring(49, 52));
-            int corretoraId = Integer.parseInt(resultSet.substring(52, 55));
+            int id = Integer.parseInt(resultSet.substring(0, 3).trim());
+            int ativoId = Integer.parseInt(resultSet.substring(3, 6).trim());
+            double quantidade = Double.parseDouble(resultSet.substring(6, 18).trim());
+            double valor = Double.parseDouble(resultSet.substring(18, 30).trim());
+            int tipo = Integer.parseInt(resultSet.substring(30, 31).trim());
+            String horarioDaTransacao = resultSet.substring(31, 50).trim();
+            int investidorId = Integer.parseInt(resultSet.substring(50, 53).trim());
+            int corretoraId = Integer.parseInt(resultSet.substring(53, 56).trim());
 
             Id idClass = new Id(id, Type.HISTORICO);
 

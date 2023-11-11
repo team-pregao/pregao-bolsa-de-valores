@@ -110,6 +110,7 @@ public class EmpresasView {
 
     public void verCarteiraButtonAction() {
         MainApp.openPane("carteira-view");
+
     }
 
     public void saldoAtualView(MouseEvent mouseEvent) {
@@ -147,6 +148,7 @@ public class EmpresasView {
             alert.setHeaderText("Erro ao comprar");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
+
         } catch (NullPointerException e){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("ERRO");
@@ -224,7 +226,7 @@ public class EmpresasView {
             }
         });
         series.getData().add(new XYChart.Data<>(count.get(), ativo.getValorAtual()));
-        lineChart.setTitle(ativo.getEmpresa() + " R$" + ativo.getValorAtual() + " | " + Investidor.round((flutuacaoLista.get(flutuacaoLista.getSize() - 1).getFlutuacao() - 1) * 100, 2) + "%");
+        lineChart.setTitle(ativo.getTicker() + " R$" + ativo.getValorAtual() + " | " + Investidor.round((flutuacaoLista.get(flutuacaoLista.getSize() - 1).getFlutuacao() - 1) * 100, 2) + "%");
 
         // Adicionando a série ao gráfico
         lineChart.getData().add(series);

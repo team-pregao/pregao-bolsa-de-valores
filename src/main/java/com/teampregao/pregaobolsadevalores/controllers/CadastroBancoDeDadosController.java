@@ -13,7 +13,7 @@ public class CadastroBancoDeDadosController {
 
     @FXML
     void cadastrarEmpresaAction(ActionEvent event) {
-        MainApp.openPane("CadastarEmpresa");
+        MainApp.openPane("CadastrarEmpresa");
 
     }
 
