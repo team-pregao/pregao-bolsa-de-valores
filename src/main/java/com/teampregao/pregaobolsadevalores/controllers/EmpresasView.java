@@ -183,7 +183,6 @@ public class EmpresasView {
 */
         // Criando o gráfico de linha
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle(ativo.getEmpresa());
 
         // Criando uma série de dados
         XYChart.Series<Number, Number> series = new XYChart.Series<>();
@@ -198,6 +197,8 @@ public class EmpresasView {
                 count.getAndIncrement();
             }
         });
+        series.getData().add(new XYChart.Data<>(count.get(), ativo.getValorAtual()));
+        lineChart.setTitle(ativo.getEmpresa() + " R$" + ativo.getValorAtual() + " | " + Investidor.round((flutuacaoLista.get(flutuacaoLista.getSize() - 1).getFlutuacao() - 1) * 100, 2) + "%");
 
         // Adicionando a série ao gráfico
         lineChart.getData().add(series);

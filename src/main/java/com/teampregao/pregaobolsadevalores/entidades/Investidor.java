@@ -1,5 +1,6 @@
 package com.teampregao.pregaobolsadevalores.entidades;
 
+import com.teampregao.pregaobolsadevalores.Cache;
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
 import com.teampregao.pregaobolsadevalores.manager.SaverManager;
 
@@ -52,32 +53,27 @@ public class Investidor {
 
         flutuacao = 1 + (flutuacao / 100);
         System.out.println("flutuacao: " + flutuacao);
+        Cache.putObject("flutuacao", flutuacao);
 
         System.out.println("ativo antes: " + ativo.getValorAtual());
         Flutuacao flutuacaoClass = new Flutuacao(new Id(Type.FLUTUACAO), ativo, flutuacao, ativo.getValorAtual());
 
         saverManager.insert(EntityManager.lineFlutuacao(flutuacaoClass), Type.FLUTUACAO);
-        String valorAtual = String.valueOf(ativo.getValorAtual() * flutuacao);
-        valorAtual = valorAtual.substring(0, valorAtual.split("\\.")[0].length() + 4);
 
-        ativo.setValorAtual(Double.parseDouble(valorAtual));
+        ativo.setValorAtual(round(ativo.getValorAtual() * flutuacao, 2));
+        if (ativo.getValorAtual() < 0.5)
+            ativo.setValorAtual(100);
         System.out.println("ativo depois: " + ativo.getValorAtual());
 
         return ativo.getValorAtual() * quantidade;
     }
 
-    public void comprarAcao(Ativo ativo, double quantidade, Corretora corretora) {
-        double custoTotal = getCustoTotal(ativo, corretora, quantidade);
+    public static double round(double d, int casas){
+        String dString = String.valueOf(d);
 
-        if (custoTotal > saldo){
-             throw new IllegalArgumentException("Saldo insuficiente para comprar ações." + "\nSaldo: " + saldo + " Custo Total: " + custoTotal);
-        }
-
-        System.out.println("compra acao");
-
-        corretora.ordenarComprarAcao(ativo, quantidade, custoTotal, this);
-
-        updateInvestidor();
+        if (dString.split("\\.")[1].length() > casas)
+            dString = dString.substring(0, dString.split("\\.")[0].length() + casas + 1);
+        return Double.parseDouble(dString);
     }
 
     public void comprarAcao(Ativo ativo, double quantidade, Corretora corretora, boolean compraInicial) {
@@ -91,8 +87,18 @@ public class Investidor {
         updateInvestidor();
     }
 
-    public void transferir(double d) {
-        saldo += d;
+    public void comprarAcao(Ativo ativo, double quantidade, Corretora corretora) {
+        double custoTotal = getCustoTotal(ativo, corretora, quantidade);
+        System.out.println("custo total: " + custoTotal);
+
+        if (custoTotal > saldo){
+             throw new IllegalArgumentException("Saldo insuficiente para comprar ações." + "\nSaldo: " + saldo + " Custo Total: " + custoTotal);
+        }
+
+        System.out.println("compra acao");
+
+        corretora.ordenarComprarAcao(ativo, quantidade, custoTotal, this);
+
         updateInvestidor();
     }
 
@@ -111,6 +117,11 @@ public class Investidor {
         corretora.ordenarVenderAcao(ativo, quantidade, custoTotal, this);
 
         System.out.println(nome + " vendeu " + quantidade + " ações da empresa " + ativo.getTicker());
+        updateInvestidor();
+    }
+
+    public void transferir(double d) {
+        saldo = round(saldo + d, 2);
         updateInvestidor();
     }
 }
