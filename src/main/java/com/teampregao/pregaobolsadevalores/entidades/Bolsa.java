@@ -15,7 +15,7 @@ public class Bolsa {
     public Bolsa(Id id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.livroDeOfertas = new Mapa<>();
+        this.livroDeOfertas = new Mapa<>();/*
         EntityManager.readAtivo().iterator().forEachRemaining(ativo -> {
             Mapa<String, Pilha<Historico>> pagina = new Mapa<>();
             Pilha<Historico> vendas = new Pilha<>();
@@ -23,11 +23,9 @@ public class Bolsa {
 
             SaverManager saverManager = new SaverManager();
             Historico pedido = new Historico();
-
-            Investidor ping = new Investidor(new Id(Type.INVESTIDOR), "ping", 10000000.0);
-            //saverManager.insert(EntityManager.lineInvestidor(ping), ping.getId().getType());
+*
             Corretora pong = new Corretora(new Id(Type.CORRETORA), "pong", this);
-           // saverManager.insert(EntityManager.lineCorretora(pong), pong.getId().getType());
+            saverManager.insert(EntityManager.lineCorretora(pong), pong.getId().getType());
             ping.comprarAcao(ativo, 1000, pong, true);
 
             pedido.setInvestidor(ping);
@@ -45,8 +43,7 @@ public class Bolsa {
             
             pagina.put("venda", vendas);
             pagina.put("compra", compras);
-            livroDeOfertas.put(ativo.getId(), pagina);
-        });
+            livroDeOfertas.put(ativo.getId(), pagina);*/
     }
 
     public String getNome() {
@@ -69,7 +66,7 @@ public class Bolsa {
             livroDeOfertas.get(pedido.getAtivo().getId()).get("compra").push(pedido);
             System.out.println("pagina criada");
         }
-        System.out.println("livro de ofertas");
+
         executarPedidos(pedido);
     }
 
@@ -82,7 +79,9 @@ public class Bolsa {
             System.out.println("pagina criada");
             livroDeOfertas.get(pedido.getAtivo().getId()).get("venda").push(pedido);
         }
+
         executarPedidos(pedido);
+
     }
 
     private void criarPagina(Historico pedido){
@@ -91,6 +90,26 @@ public class Bolsa {
         pagina.put("compra", new Pilha<>());
         livroDeOfertas.put(pedido.getAtivo().getId(), pagina);
         System.out.println("pagina criada");
+    }
+
+    public void executarAcao(Historico pedido) {
+        if (pedido.getTipo() == 1){
+            System.out.println("1");
+            double qntCustodiado = pedido.getInvestidor().getCustodiante().getAtivosCustodiados().get(pedido.getAtivo().getId().getId()).getQuantidade();
+            pedido.getInvestidor().getCustodiante().adicionarAtivoCustodiado(pedido.getAtivo(), qntCustodiado - pedido.getQuantidade());
+            pedido.getInvestidor().transferir(pedido.getValor());
+        } else if (pedido.getTipo() == 0) {
+            System.out.println("0");
+            if (pedido.getInvestidor().getCustodiante().getAtivosCustodiados().get(pedido.getAtivo().getId().getId()) != null){
+                System.out.println("update custoidado");
+                double qntCustodiado = pedido.getInvestidor().getCustodiante().getAtivosCustodiados().get(pedido.getAtivo().getId().getId()).getQuantidade();
+                pedido.getInvestidor().getCustodiante().adicionarAtivoCustodiado(pedido.getAtivo(), qntCustodiado + pedido.getQuantidade());
+            } else {
+                System.out.println("insert custodiado");
+               pedido.getInvestidor().getCustodiante().adicionarAtivoCustodiado(pedido.getAtivo(), pedido.getQuantidade());
+            }
+            pedido.getInvestidor().transferir(pedido.getValor() * -1);
+        }
     }
     
     public void executarPedidos(Historico pedido) {
@@ -120,7 +139,7 @@ public class Bolsa {
             } else if (pedidoCompra.getQuantidade() < pedidoVenda.getQuantidade()) {
                 System.out.println("2");
                 pedidoVenda.setQuantidade(pedidoVenda.getQuantidade() - pedidoCompra.getQuantidade());
-                pilhaDeVendas.push(pedidoVenda); //falta ainda 3
+                pilhaDeVendas.push(pedidoVenda);
                 pedidoVenda.getInvestidor().getCustodiante().adicionarAtivoCustodiado(pedidoVenda.getAtivo(), pedidoVenda.getQuantidade());
                 pedidoCompra.getInvestidor().getCustodiante().adicionarAtivoCustodiado(pedidoCompra.getAtivo(), pedidoCompra.getQuantidade());
                 pedidoCompra.getInvestidor().transferir(pedidoCompra.getValor() * -1);

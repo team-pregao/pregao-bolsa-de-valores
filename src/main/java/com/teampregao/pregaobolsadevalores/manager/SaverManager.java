@@ -1,6 +1,5 @@
 package com.teampregao.pregaobolsadevalores.manager;
 
-
 import com.teampregao.pregaobolsadevalores.ed.*;
 import com.teampregao.pregaobolsadevalores.entidades.*;
 
@@ -76,10 +75,12 @@ public class SaverManager {
         int idNew = id.getId() - 1;
         String line = read(id.getType());
         String newLine = "";
+        System.out.println("linha: " + line);
+        System.out.println("nova linha " + newValue);
         try {
             newLine = line.replace(line.substring(idNew * id.getType().maxLenght, idNew * id.getType().maxLenght + id.getType().maxLenght), newValue);
         }catch (Exception e){
-            return;
+            e.printStackTrace();
         }
 
         String[] strings = read().split("\n");

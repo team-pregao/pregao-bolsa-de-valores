@@ -2,9 +2,10 @@ package com.teampregao.pregaobolsadevalores.entidades;
 
 public class AtivoCustodiado {
     private final Id id;
-    private final Investidor investidor;
+    public int investidorId;
     private final Ativo ativo;
     private double quantidade;
+    private Investidor investidor;
 
     public AtivoCustodiado(Id id, Investidor investidor, Ativo ativo, double quantidade) {
         this.id = id;
@@ -31,5 +32,9 @@ public class AtivoCustodiado {
 
     public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public void setInvestidor(Investidor investidor){
+        this.investidor = investidor;
     }
 }

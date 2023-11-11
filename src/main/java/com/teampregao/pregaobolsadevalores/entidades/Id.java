@@ -21,11 +21,14 @@ public class Id {
     private int getIdAutoIncremente(Type type) {
         SaverManager saverManager = new SaverManager();
         String currenteLine = saverManager.read(type);
-        if (currenteLine == null){
+        if (currenteLine == null || currenteLine.length() == 0){
+            System.out.println("id: 1");
             return 1;
         }
-        System.out.println(currenteLine);
-        System.out.println(currenteLine.length());
+        System.out.println("tipo: " + type.type);
+        System.out.println("lengt: " + currenteLine.length());
+        System.out.println("max leng: " + type.maxLenght);
+        System.out.println("id: " + ((currenteLine.length() / type.maxLenght) + 1));
         return (currenteLine.length() / type.maxLenght) + 1;
     }
 

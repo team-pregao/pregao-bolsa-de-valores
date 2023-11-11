@@ -5,21 +5,46 @@ import com.teampregao.pregaobolsadevalores.manager.*;
 import com.teampregao.pregaobolsadevalores.ed.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainApp extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("empresas-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Simulador Bolsa de Valores");
+    public static Stage stage;
+    public static String root = "CadastroBancoDeDados";
+
+    static void setRoot(String fxml) throws IOException {
+        setRoot(fxml,stage.getTitle());
+    }
+
+    static void setRoot(String fxml, String title) throws IOException {
+        Parent root = loadFXML(fxml);
+        Scene scene = new Scene(root);
+        stage.setTitle(title);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+    }
 
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
+    public static void openPane(String s){
+        try {
+            setRoot(s);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void start(Stage s) throws IOException {
+        stage=s;
+        setRoot(root,"Simulador Pregao");
     }
 
     public static void main(String[] args) {
@@ -88,13 +113,6 @@ public class MainApp extends Application {
             System.out.println("Empresa: " + ativo.getEmpresa() + ", Ticker: " + ativo.getTicker() + ", Valor Atual: " + ativo.getValorAtual());
         }
 /**/
-        ListaEncadeada<Investidor> investidores = EntityManager.readInvestidor();
-        ListaEncadeada<Corretora> corretoras = EntityManager.readCorretora();
-        ListaEncadeada<Ativo> ativos = EntityManager.readAtivo();
-
-        Cache.putObject("user", investidores.get(0));
-        Cache.putObject("ativo", ativos.get(0));
-        Cache.putObject("corretora", corretoras.get(0));
         launch();
     }
 }

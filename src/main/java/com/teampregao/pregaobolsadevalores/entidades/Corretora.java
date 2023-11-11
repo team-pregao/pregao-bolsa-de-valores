@@ -33,10 +33,11 @@ public class Corretora {
     public void ordenarComprarAcao(Ativo ativo, double quantidade, Investidor investidor){
         double custoTotal = ativo.getValorAtual() * quantidade;
         Historico pedido = new Historico(ativo, quantidade, custoTotal, COMPRA, investidor, this);
-        bolsa.adicionarPedidoDeCompra(pedido);
+        SaverManager saverManager = new SaverManager();
+        saverManager.insert(EntityManager.lineHistorico(pedido), pedido.getId().getType());
+        bolsa.executarAcao(pedido);
         System.out.println("ordenar compra");
     }
-
 
     public void ordenarComprarAcao(Ativo ativo, double quantidade, Investidor investidor, boolean ordemDeCompraInicial){
         double custoTotal = ativo.getValorAtual() * quantidade;
@@ -49,13 +50,15 @@ public class Corretora {
     }
 
     public void ordenarVenderAcao(Ativo ativo, double quantidade, Investidor investidor){
-        if (investidor.getCustodiante().getAtivosCustodiados().get(ativo).getQuantidade() < quantidade){
+        if (investidor.getCustodiante().getAtivosCustodiados() == null || investidor.getCustodiante().getAtivosCustodiados().get(ativo.getId().getId()).getQuantidade() < quantidade){
             throw new IllegalArgumentException("Voce nao tem esse quantidade toda pra vender nao amigao");
         }
 
         double custoTotal = ativo.getValorAtual() * quantidade;
         Historico pedido = new Historico(ativo, quantidade, custoTotal, VENDA, investidor, this);
-        bolsa.adicionarPedidoDeVenda(pedido);
-    }
+        SaverManager saverManager = new SaverManager();
+        saverManager.insert(EntityManager.lineHistorico(pedido), pedido.getId().getType());
 
+        bolsa.executarAcao(pedido);
+    }
 }

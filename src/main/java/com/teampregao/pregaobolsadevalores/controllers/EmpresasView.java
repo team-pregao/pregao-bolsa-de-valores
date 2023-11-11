@@ -1,10 +1,13 @@
 package com.teampregao.pregaobolsadevalores.controllers;
 
 import com.teampregao.pregaobolsadevalores.Cache;
+import com.teampregao.pregaobolsadevalores.MainApp;
 import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
 import com.teampregao.pregaobolsadevalores.entidades.Type;
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
 import com.teampregao.pregaobolsadevalores.manager.SaverManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -37,7 +40,7 @@ public class EmpresasView {
     public Button venderAcaoButton;
 
     private double saldo;
-    private int totalAcao;
+    private double totalAcao;
     private Investidor investidor;
     private Ativo ativo;
     private Corretora corretora;
@@ -47,44 +50,63 @@ public class EmpresasView {
 
     @FXML
     void initialize(){
-        SaverManager saverManager = new SaverManager();
-
         ListaEncadeada<Ativo> resultAtivos = readAtivo();
 
         for (Ativo ativo:
              resultAtivos) {
             empresasComboBox.getItems().add(ativo.getEmpresa());
-            System.out.println(ativo);
         }
-        investidor = (Investidor) Cache.getObject("user");
-        ativo = (Ativo) Cache.getObject("ativo");
-        corretora = (Corretora) Cache.getObject("corretora");
-        saldo = investidor.getSaldo();
 
-        Custodiante custodiante = readCustodiante(investidor.getCustodiante().getId().getId());
-        ListaEncadeada<Ativo> ativos = new ListaEncadeada<>();
-        readAtivoCustodiado().iterator().forEachRemaining(item -> {
-            if (item.getInvestidor() == null){
-
-            }
-            else if (item.getInvestidor().getId().getId() == investidor.getId().getId()){
-                System.out.println(EntityManager.lineAtivoCustodiado(item));
-                System.out.println(investidor.getId().getId());
-                System.out.println(item.getInvestidor().getId().getId());
-                ativos.add(item.getAtivo());
+        empresasComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            empresaLabel.setText(newValue);
+            ListaEncadeada<Ativo> ativos = EntityManager.readAtivo();
+            for (Ativo ativo1 : ativos) {
+                if (ativo1.getEmpresa().equals(newValue)){
+                    ativo = ativo1;
+                    saldoEAcaoRoutine();
+                }
             }
         });
 
-        totalAcao = ativos.getSize();
-        saldoAtualField.setText(String.valueOf(saldo));
-        totalAcoesField.setText(String.valueOf(totalAcao));
+        investidor = EntityManager.refinedReadInvestidor((Investidor) Cache.getObject("user"));
+        ativo = (Ativo) Cache.getObject("ativo");
+        corretora = (Corretora) Cache.getObject("corretora");
 
-        empresaLabel.setText(ativo.getEmpresa());
+        saldoEAcaoRoutine();
+
+        if (ativo == null){
+            empresaLabel.setText("Escolha um Ativo");
+        } else {
+            empresaLabel.setText(ativo.getEmpresa());
+        }
+
         corretoraLabel.setText(corretora.getNome());
 
         qntComprarAcaoField.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (!newValue){
-                valorComprarAcaoField.setText(String.valueOf(Double.parseDouble(qntComprarAcaoField.getText()) * ativo.getValorAtual()));
+                double valorAtivo = ativo == null ? 0.0 : ativo.getValorAtual();
+                valorComprarAcaoField.setText(String.valueOf(Double.parseDouble(qntComprarAcaoField.getText().isEmpty() ? "0" : qntComprarAcaoField.getText()) * valorAtivo));
+            }
+        }));
+
+        qntVenderAcaoField.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (!newValue){
+                double valorAtivo = ativo == null ? 0.0 : ativo.getValorAtual();
+                valorVenderAcaoField.setText(String.valueOf(Double.parseDouble(qntVenderAcaoField.getText().isEmpty() ? "0" : qntVenderAcaoField.getText()) * valorAtivo));
+            }
+        }));
+
+        valorComprarAcaoField.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (!newValue){
+                double valorAtivo = ativo == null ? 1.0 : ativo.getValorAtual();
+                qntComprarAcaoField.setText(String.valueOf(Double.parseDouble(valorComprarAcaoField.getText().isEmpty() ? "0" : valorComprarAcaoField.getText()) / valorAtivo));
+            }
+        }));
+
+        valorVenderAcaoField.focusedProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (!newValue){
+                double valorAtivo = ativo == null ? 1.0 : ativo.getValorAtual();
+                qntVenderAcaoField.setText(String.valueOf(Double.parseDouble(valorVenderAcaoField.getText().isEmpty() ? "0" : valorVenderAcaoField.getText()) / valorAtivo));
             }
         }));
     }
@@ -115,10 +137,36 @@ public class EmpresasView {
     }
 
     public void comprarAcaoButtonAction() {
-        investidor.comprarAcao(ativo, Double.parseDouble(qntComprarAcaoField.getText()), corretora);
+        if (qntComprarAcaoField.getText().isEmpty() || qntComprarAcaoField.getText().isBlank()){
+            investidor.comprarAcao(ativo, Double.parseDouble(valorComprarAcaoField.getText())/ativo.getValorAtual(), corretora);
+        } else {
+            investidor.comprarAcao(ativo, Double.parseDouble(qntComprarAcaoField.getText()), corretora);
+        }
+
+        saldoEAcaoRoutine();
+
     }
 
     public void venderAcaoButtonAction() {
-        investidor.venderAcao(ativo, Double.parseDouble(qntVenderAcaoField.getText()), corretora);
+        if (qntVenderAcaoField.getText().isEmpty() || qntVenderAcaoField.getText().isBlank()){
+            investidor.venderAcao(ativo, Double.parseDouble(valorVenderAcaoField.getText())/ativo.getValorAtual(), corretora);
+        } else {
+            investidor.venderAcao(ativo, Double.parseDouble(qntVenderAcaoField.getText()), corretora);
+        }
+
+        saldoEAcaoRoutine();
+    }
+
+    private void saldoEAcaoRoutine(){
+        saldo = investidor.getSaldo();
+
+        if (ativo != null && investidor.getCustodiante().getAtivosCustodiados().get(ativo.getId().getId()) != null){
+            totalAcao = investidor.getCustodiante().getAtivosCustodiados().get(ativo.getId().getId()).getQuantidade();
+        } else {
+            totalAcao = 0.0;
+        }
+
+        saldoAtualField.setText(String.valueOf(saldo));
+        totalAcoesField.setText(String.valueOf(totalAcao));
     }
 }

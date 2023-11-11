@@ -2,10 +2,9 @@ package com.teampregao.pregaobolsadevalores.manager;
 
 import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
 import com.teampregao.pregaobolsadevalores.entidades.*;
-import javafx.util.converter.LocalDateStringConverter;
 import javafx.util.converter.LocalDateTimeStringConverter;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EntityManager{
@@ -53,20 +52,16 @@ public class EntityManager{
         ListaEncadeada<Investidor> investidorLista = new ListaEncadeada<>();
 
         while (resultSet.length() >= Type.INVESTIDOR.maxLenght) {
-            try {
-                int id = Integer.parseInt(resultSet.substring(0, 3).trim());
-                String nome = resultSet.substring(3, 103).trim();
-                double saldo = Double.parseDouble(resultSet.substring(103, 115).trim());
-                int custodianteId = Integer.parseInt(resultSet.substring(115, 118).trim());
+            int id = Integer.parseInt(resultSet.substring(0, 3).trim());
+            String nome = resultSet.substring(3, 103).trim();
+            double saldo = Double.parseDouble(resultSet.substring(103, 115).trim());
+            int custodianteId = Integer.parseInt(resultSet.substring(115, 118).trim());
 
-                Id idClass = new Id(id, Type.INVESTIDOR);
-                Investidor investidor = new Investidor(idClass, nome, saldo);
-                investidor.setCustodiante(readCustodiante(custodianteId));
+            Id idClass = new Id(id, Type.INVESTIDOR);
+            Investidor investidor = new Investidor(idClass, nome, saldo, null);
+            investidor.custodianteId = custodianteId;
 
-                investidorLista.add(investidor);
-            } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
-                throw new RuntimeException();
-            }
+            investidorLista.add(investidor);
 
             resultSet = resultSet.substring(Type.INVESTIDOR.maxLenght);
         }
@@ -97,8 +92,6 @@ public class EntityManager{
         ListaEncadeada<Ativo> ativoLista = new ListaEncadeada<>();
 
         while (resultSet.length() >= Type.ATIVO.maxLenght) {
-            System.out.println(resultSet);
-
             int id = Integer.parseInt(resultSet.substring(0, 3).trim());
             String empresa = resultSet.substring(3, 103).trim();
             String ticker = resultSet.substring(103, 109).trim();
@@ -106,7 +99,6 @@ public class EntityManager{
 
             Id idClass = new Id(id, Type.ATIVO);
             Ativo ativo = null;
-            System.out.println(ticker);
             switch (Integer.parseInt(ticker.substring(4))) {
                 case 3 -> {
                     ativo = new AcaoOrdinaria(idClass, empresa, valorAtual);
@@ -195,23 +187,20 @@ public class EntityManager{
         ListaEncadeada<Carteira> carteiraLista = new ListaEncadeada<>();
 
         while (resultSet.length() >= Type.CARTEIRA.maxLenght) {
-            try {
-                int id = Integer.parseInt(resultSet.substring(0, 3));
-                int investidorId = Integer.parseInt(resultSet.substring(3, 6));
-                int corretoraId = Integer.parseInt(resultSet.substring(6, 9));
 
-                Id idClass = new Id(id, Type.CARTEIRA);
+            int id = Integer.parseInt(resultSet.substring(0, 3).trim());
+            int investidorId = Integer.parseInt(resultSet.substring(3, 6).trim());
+            int corretoraId = Integer.parseInt(resultSet.substring(6, 9).trim());
 
-                Investidor investidor = readInvestidor(investidorId);
+            Id idClass = new Id(id, Type.CARTEIRA);
 
-                Corretora corretora = readCorretora(corretoraId);
+            Investidor investidor = readInvestidor(investidorId);
 
-                Carteira carteira = new Carteira(idClass, investidor, corretora);
+            Corretora corretora = readCorretora(corretoraId);
 
-                carteiraLista.add(carteira);
-            } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
-                throw new RuntimeException();
-            }
+            Carteira carteira = new Carteira(idClass, investidor, corretora);
+
+            carteiraLista.add(carteira);
 
             resultSet = resultSet.substring(Type.CARTEIRA.maxLenght);
         }
@@ -239,22 +228,15 @@ public class EntityManager{
 
         ListaEncadeada<Custodiante> custodianteLista = new ListaEncadeada<>();
 
-        while (resultSet.length() >= Type.CUSTODIANTE.maxLenght) {
-            try {
-                int id = Integer.parseInt(resultSet.substring(0, 3).trim());
-                int investidorId = Integer.parseInt(resultSet.substring(3, 6).trim());
+        while (resultSet.length() > 0) {
+            int id = Integer.parseInt(resultSet.substring(0, 3).trim());
+            int investidorId = Integer.parseInt(resultSet.substring(3, 6).trim());
 
-                Id idClass = new Id(id, Type.CUSTODIANTE);
+            Id idClass = new Id(id, Type.CUSTODIANTE);
 
-                // Defina o investidor com base no ID
-                Investidor investidor = new Investidor(new Id(investidorId, Type.INVESTIDOR), "", 0);
+            Custodiante custodiante = new Custodiante(idClass, null);
 
-                Custodiante custodiante = new Custodiante(idClass, investidor);
-                custodianteLista.add(custodiante);
-            } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
-                throw new RuntimeException();
-            }
-
+            custodianteLista.add(custodiante);
             resultSet = resultSet.substring(Type.CUSTODIANTE.maxLenght);
         }
 
@@ -269,14 +251,14 @@ public class EntityManager{
         });
         return custodiante.get();
     }
-    
+
     public static String lineHistorico(Historico historico) {
         return intField(historico.getId().getId(), 3) +
                 intField(historico.getAtivo().getId().getId(), 3) +
                 doubleField(historico.getQuantidade(), 5) +
                 doubleField(historico.getValor(), 12) +
                 intField(historico.getTipo(), 1) +
-                historico.getHorarioDaTransacao().toString() +
+                stringField(historico.getHorarioDaTransacao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 19) +
                 intField(historico.getInvestidor().getId().getId(), 3) +
                 intField(historico.getCorretora().getId().getId(), 3);
     }
@@ -288,32 +270,28 @@ public class EntityManager{
         ListaEncadeada<Historico> historicoLista = new ListaEncadeada<>();
 
         while (resultSet.length() >= Type.HISTORICO.maxLenght) {
-            try {
-                int id = Integer.parseInt(resultSet.substring(0, 3));
-                int ativoId = Integer.parseInt(resultSet.substring(3, 6));
-                double quantidade = Double.parseDouble(resultSet.substring(6, 18));
-                double valor = Double.parseDouble(resultSet.substring(18, 30));
-                int tipo = Integer.parseInt(resultSet.substring(30, 31));
-                String horarioDaTransacao = resultSet.substring(31, 49);
-                int investidorId = Integer.parseInt(resultSet.substring(49, 52));
-                int corretoraId = Integer.parseInt(resultSet.substring(52, 55));
+            int id = Integer.parseInt(resultSet.substring(0, 3));
+            int ativoId = Integer.parseInt(resultSet.substring(3, 6));
+            double quantidade = Double.parseDouble(resultSet.substring(6, 18));
+            double valor = Double.parseDouble(resultSet.substring(18, 30));
+            int tipo = Integer.parseInt(resultSet.substring(30, 31));
+            String horarioDaTransacao = resultSet.substring(31, 49);
+            int investidorId = Integer.parseInt(resultSet.substring(49, 52));
+            int corretoraId = Integer.parseInt(resultSet.substring(52, 55));
 
-                Id idClass = new Id(id, Type.HISTORICO);
+            Id idClass = new Id(id, Type.HISTORICO);
 
-                // Defina o ativo com base no ID
-                Ativo ativo = readAtivo(ativoId);
+            // Defina o ativo com base no ID
+            Ativo ativo = readAtivo(ativoId);
 
-                // Defina o investidor com base no ID
-                Investidor investidor = readInvestidor(investidorId);
+            // Defina o investidor com base no ID
+            Investidor investidor = readInvestidor(investidorId);
 
-                // Defina a corretora com base no ID
-                Corretora corretora = readCorretora(corretoraId);
+            // Defina a corretora com base no ID
+            Corretora corretora = readCorretora(corretoraId);
 
-                Historico historico = new Historico(idClass, ativo, quantidade, valor, tipo, investidor, corretora, new LocalDateTimeStringConverter().fromString(horarioDaTransacao));
-                historicoLista.add(historico);
-            } catch (NumberFormatException | StringIndexOutOfBoundsException ex) {
-                throw new RuntimeException();
-            }
+            Historico historico = new Historico(idClass, ativo, quantidade, valor, tipo, investidor, corretora, new LocalDateTimeStringConverter().fromString(horarioDaTransacao));
+            historicoLista.add(historico);
 
             resultSet = resultSet.substring(Type.HISTORICO.maxLenght);
         }
@@ -365,7 +343,6 @@ public class EntityManager{
         return bolsa.get();
     }
 
-
     public static String lineAtivoCustodiado(AtivoCustodiado ativoCustodiado) {
         return intField(ativoCustodiado.getId().getId(), 3) +
                 intField(ativoCustodiado.getInvestidor().getId().getId(), 3) +
@@ -387,11 +364,10 @@ public class EntityManager{
 
             Id idClass = new Id(id, Type.ATIVO_CUSTODIADO);
 
-            Investidor investidor = readInvestidor(investidorId);
-
             Ativo ativo = readAtivo(ativoId);
 
-            AtivoCustodiado ativoCustodiado = new AtivoCustodiado(idClass, investidor, ativo, quantidade);
+            AtivoCustodiado ativoCustodiado = new AtivoCustodiado(idClass, null, ativo, quantidade);
+            ativoCustodiado.investidorId = investidorId;
             ativoCustodiadoLista.add(ativoCustodiado);
 
 
@@ -401,7 +377,16 @@ public class EntityManager{
         return ativoCustodiadoLista;
     }
 
-
-
-
+    public static Investidor refinedReadInvestidor(Investidor investidor) {
+        Custodiante custodiante = readCustodiante(investidor.custodianteId);
+        custodiante.setInvestidor(investidor);
+        readAtivoCustodiado().forEach(ativoCustodiado -> {
+            if (ativoCustodiado.investidorId == investidor.getId().getId()){
+                ativoCustodiado.setInvestidor(investidor);
+                custodiante.put(ativoCustodiado.getAtivo(), ativoCustodiado);
+            }
+        });
+        investidor.setCustodiante(custodiante);
+        return investidor;
+    }
 }

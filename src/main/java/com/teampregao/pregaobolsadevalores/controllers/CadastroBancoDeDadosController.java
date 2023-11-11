@@ -1,22 +1,30 @@
 package com.teampregao.pregaobolsadevalores.controllers;
 
+import com.teampregao.pregaobolsadevalores.MainApp;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 public class CadastroBancoDeDadosController {
-    @FXML
-    private Button btnCadastrarInvestidor;
 
     @FXML
-    private Button btnCadastrarCorretora;
+    void cadastrarCorretoraAction(ActionEvent event) {
+        MainApp.openPane("CadastrarCorretora");
+    }
 
     @FXML
-    private Button btnCadastrarEmpresa;
-
-    @FXML
-    private Button btnSimulacao;
-
-    public void onActionCadastrarBancoDeDados(){
+    void cadastrarEmpresaAction(ActionEvent event) {
+        MainApp.openPane("CadastarEmpresa");
 
     }
+
+    @FXML
+    void cadastrarInvestidorAction(ActionEvent event) {
+        MainApp.openPane("CadastrarInvestidor");
+    }
+
+    @FXML
+    void startSimulationAction(ActionEvent event) {
+        MainApp.openPane("UserRegistration");
+    }
+
 }

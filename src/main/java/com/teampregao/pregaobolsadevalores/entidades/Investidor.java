@@ -9,11 +9,20 @@ public class Investidor {
     private double saldo;
     private Custodiante custodiante;
 
+    public int custodianteId;
+
     public Investidor(Id id, String nome, double saldo) {
         this.id = id;
         this.nome = nome;
         this.saldo = saldo;
         custodiante = new Custodiante(new Id(Type.CUSTODIANTE), this);
+    }
+
+    public Investidor(Id id, String nome, double saldo, Custodiante custodiante) {
+        this.id = id;
+        this.nome = nome;
+        this.saldo = saldo;
+        this.custodiante = custodiante;
     }
 
     public String getNome() {
@@ -46,6 +55,8 @@ public class Investidor {
         System.out.println("compra acao");
 
         corretora.ordenarComprarAcao(ativo, quantidade, this);
+
+        updateInvestidor();
     }
 
 
@@ -57,8 +68,7 @@ public class Investidor {
         }
 
         corretora.ordenarComprarAcao(ativo, quantidade, this, compraInicial);
-        SaverManager saverManager = new SaverManager();
-        saverManager.update(id, EntityManager.lineInvestidor(this));
+        updateInvestidor();
     }
 
     public void venderAcao(Ativo ativo, double quantidade, Corretora corretora) {
@@ -68,11 +78,16 @@ public class Investidor {
         corretora.ordenarVenderAcao(ativo, quantidade, this);
 
         System.out.println(nome + " vendeu " + quantidade + " ações da empresa " + ativo.getTicker());
-        SaverManager saverManager = new SaverManager();
-        saverManager.update(id, EntityManager.lineInvestidor(this));
+        updateInvestidor();
     }
 
     public void transferir(double d) {
         saldo += d;
+        updateInvestidor();
+    }
+
+    private void updateInvestidor() {
+        SaverManager manager = new SaverManager();
+        manager.update(id, EntityManager.lineInvestidor(this));
     }
 }

@@ -14,10 +14,6 @@ public class CadastroCorretoraController {
     @FXML
     private Button btnCadastrar;
 
-  
-
-
-
     public void onActionCadastrarCorretora(){
         String nome = txfNome.getText();
 
