@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import com.teampregao.pregaobolsadevalores.entidades.*;
@@ -136,21 +133,48 @@ public class EmpresasView {
     }
 
     public void comprarAcaoButtonAction() {
-        if (qntComprarAcaoField.getText().isEmpty() || qntComprarAcaoField.getText().isBlank()){
-            investidor.comprarAcao(ativo, Double.parseDouble(valorComprarAcaoField.getText())/ativo.getValorAtual(), corretora);
-        } else {
-            investidor.comprarAcao(ativo, Double.parseDouble(qntComprarAcaoField.getText()), corretora);
+        try {
+            if (qntComprarAcaoField.getText().isEmpty() || qntComprarAcaoField.getText().isBlank()) {
+                investidor.comprarAcao(ativo, Double.parseDouble(valorComprarAcaoField.getText()) / ativo.getValorAtual(), corretora);
+            } else {
+                investidor.comprarAcao(ativo, Double.parseDouble(qntComprarAcaoField.getText()), corretora);
+            }
+        } catch (IllegalArgumentException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERRO");
+            alert.setHeaderText("Erro ao comprar");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERRO");
+            alert.setHeaderText("Erro ao comprar");
+            alert.setContentText("Nenhum ativo selecionado");
+            alert.showAndWait();
         }
-
         saldoEAcaoRoutine();
         graphicRoutine();
     }
 
     public void venderAcaoButtonAction() {
-        if (qntVenderAcaoField.getText().isEmpty() || qntVenderAcaoField.getText().isBlank()){
-            investidor.venderAcao(ativo, Double.parseDouble(valorVenderAcaoField.getText())/ativo.getValorAtual(), corretora);
-        } else {
-            investidor.venderAcao(ativo, Double.parseDouble(qntVenderAcaoField.getText()), corretora);
+        try {
+            if (qntVenderAcaoField.getText().isEmpty() || qntVenderAcaoField.getText().isBlank()){
+                investidor.venderAcao(ativo, Double.parseDouble(valorVenderAcaoField.getText())/ativo.getValorAtual(), corretora);
+            } else {
+                investidor.venderAcao(ativo, Double.parseDouble(qntVenderAcaoField.getText()), corretora);
+            }
+        }  catch (IllegalArgumentException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERRO");
+            alert.setHeaderText("Erro ao vender");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("ERRO");
+            alert.setHeaderText("Erro ao comprar");
+            alert.setContentText("Nenhum ativo selecionado");
+            alert.showAndWait();
         }
 
         saldoEAcaoRoutine();
