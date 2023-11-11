@@ -29,9 +29,9 @@ public class ScriptDatabase {
         saverManager.insert(EntityManager.lineCustodiante(investidor2.getCustodiante()), Type.CUSTODIANTE);
 
         // Simular algumas corretoras.
-        Corretora corretora1 = new Corretora(new Id(Type.CORRETORA), "Corretora ALPHA", bolsa);
+        Corretora corretora1 = new Corretora(new Id(Type.CORRETORA), "Corretora ALPHA", bolsa, 100);
         saverManager.insert(EntityManager.lineCorretora(corretora1), Type.CORRETORA);
-        Corretora corretora2 = new Corretora(new Id(Type.CORRETORA), "Corretora BETA", bolsa);
+        Corretora corretora2 = new Corretora(new Id(Type.CORRETORA), "Corretora BETA", bolsa, 200);
         saverManager.insert(EntityManager.lineCorretora(corretora2), Type.CORRETORA);
 
         Carteira carteira1 = new Carteira(new Id(Type.CARTEIRA), investidor1, corretora1);

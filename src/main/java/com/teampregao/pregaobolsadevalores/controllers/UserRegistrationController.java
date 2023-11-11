@@ -27,6 +27,17 @@ public class UserRegistrationController {
 
     @FXML
     public void initialize(){
+
+        ListaEncadeada<Corretora> corretoras = EntityManager.readCorretora();
+        corretoras.forEach(corretora -> {
+            MenuItem item = new MenuItem();
+            item.setText(corretora.getNome());
+            item.setOnAction(event -> {
+                corretorasMenuButton.setText(corretora.getNome());
+                Cache.putObject("corretora", corretora);
+            });
+            corretorasMenuButton.getItems().add(item);
+        });
         try {
             ListaEncadeada<Investidor> investidores = EntityManager.readInvestidor();
             investidores.forEach(investidor -> {
@@ -37,17 +48,6 @@ public class UserRegistrationController {
                     Cache.putObject("user", investidor);
                 });
                 investidoresMenuButton.getItems().add(item);
-            });
-
-            ListaEncadeada<Corretora> corretoras = EntityManager.readCorretora();
-            corretoras.forEach(corretora -> {
-                MenuItem item = new MenuItem();
-                item.setText(corretora.getNome());
-                item.setOnAction(event -> {
-                    corretorasMenuButton.setText(corretora.getNome());
-                    Cache.putObject("corretora", corretora);
-                });
-                corretorasMenuButton.getItems().add(item);
             });
         } catch (Exception e){
             MenuItem item = new MenuItem();

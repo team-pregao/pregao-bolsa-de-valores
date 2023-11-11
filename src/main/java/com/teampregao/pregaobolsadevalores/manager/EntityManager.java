@@ -4,6 +4,7 @@ import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
 import com.teampregao.pregaobolsadevalores.entidades.*;
 import javafx.util.converter.LocalDateTimeStringConverter;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -139,7 +140,8 @@ public class EntityManager{
     public static String lineCorretora(Corretora corretora) {
         return intField(corretora.getId().getId(), 3) +
                 stringField(corretora.getNome(), 100) +
-                intField(corretora.getBolsa().getId().getId(), 3);
+                intField(corretora.getBolsa().getId().getId(), 3) +
+                intField(corretora.getFaixa(), 3);
     }
 
     public static ListaEncadeada<Corretora> readCorretora() {
@@ -152,10 +154,11 @@ public class EntityManager{
             int id = Integer.parseInt(resultSet.substring(0, 3).trim());
             String nome = resultSet.substring(3, 103).trim();
             int bolsaId = Integer.parseInt(resultSet.substring(103, 106).trim());
+            int faixa = Integer.parseInt(resultSet.substring(106, 109).trim());
 
             Id idClass = new Id(id, Type.CORRETORA);
             Bolsa bolsa = readBolsa(bolsaId);
-            Corretora corretora = new Corretora(idClass, nome, bolsa);
+            Corretora corretora = new Corretora(idClass, nome, bolsa, faixa);
 
             corretoraLista.add(corretora);
 
@@ -290,7 +293,7 @@ public class EntityManager{
             // Defina a corretora com base no ID
             Corretora corretora = readCorretora(corretoraId);
 
-            Historico historico = new Historico(idClass, ativo, quantidade, valor, tipo, investidor, corretora, new LocalDateTimeStringConverter().fromString(horarioDaTransacao));
+            Historico historico = new Historico(idClass, ativo, quantidade, valor, tipo, investidor, corretora, LocalDateTime.parse(horarioDaTransacao, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             historicoLista.add(historico);
 
             resultSet = resultSet.substring(Type.HISTORICO.maxLenght);
@@ -389,4 +392,42 @@ public class EntityManager{
         investidor.setCustodiante(custodiante);
         return investidor;
     }
+
+    public static String lineFlutuacao(Flutuacao flutuacao) {
+        return intField(flutuacao.getId().getId(), 3) +
+                intField(flutuacao.getAtivo().getId().getId(), 3) +
+                doubleField(flutuacao.getPrecoAtivo(), 12) +
+                doubleField(flutuacao.getFlutuacao(), 18) +
+                stringField(flutuacao.getHorario().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 19);
+    }
+
+    public static ListaEncadeada<Flutuacao> readFlutuacao() {
+        SaverManager saverManager = new SaverManager();
+        String resultSet = saverManager.read(Type.FLUTUACAO);
+
+        ListaEncadeada<Flutuacao> flutuacaoLista = new ListaEncadeada<>();
+
+        while (resultSet.length() >= Type.FLUTUACAO.maxLenght) {
+            int id = Integer.parseInt(resultSet.substring(0, 3).trim());
+            int ativoId = Integer.parseInt(resultSet.substring(3, 6).trim());
+            double precoAtivo = Double.parseDouble(resultSet.substring(6, 18).trim());
+            double flutuacaoValor = Double.parseDouble(resultSet.substring(18, 36).trim());
+            String horario = resultSet.substring(36, 55);
+
+
+            Id idClass = new Id(id, Type.FLUTUACAO);
+
+            Ativo ativo = readAtivo(ativoId);
+
+            Flutuacao flutuacao = new Flutuacao(idClass, ativo, flutuacaoValor, precoAtivo);
+            flutuacao.setHorario(LocalDateTime.parse(horario, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+            flutuacaoLista.add(flutuacao);
+
+            resultSet = resultSet.substring(Type.FLUTUACAO.maxLenght);
+        }
+
+        return flutuacaoLista;
+    }
+
 }

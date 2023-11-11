@@ -5,7 +5,7 @@ import com.teampregao.pregaobolsadevalores.manager.EntityManager;
 public abstract class Ativo {
     protected final Id id;
     protected final String empresa;
-    protected final double valorAtual;
+    protected double valorAtual;
 
     public Ativo(Id id, String empresa, double valorAtual) {
         this.id = id;
@@ -24,5 +24,9 @@ public abstract class Ativo {
 
     public String getEmpresa() {
         return empresa;
+    }
+
+    public void setValorAtual(double valorAtual) {
+        this.valorAtual = valorAtual;
     }
 }

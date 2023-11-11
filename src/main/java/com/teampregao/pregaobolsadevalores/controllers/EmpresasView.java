@@ -1,25 +1,22 @@
 package com.teampregao.pregaobolsadevalores.controllers;
 
 import com.teampregao.pregaobolsadevalores.Cache;
-import com.teampregao.pregaobolsadevalores.MainApp;
 import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
-import com.teampregao.pregaobolsadevalores.entidades.Type;
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
-import com.teampregao.pregaobolsadevalores.manager.SaverManager;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 import com.teampregao.pregaobolsadevalores.entidades.*;
-import com.teampregao.pregaobolsadevalores.manager.EntityManager.*;
+import javafx.scene.layout.VBox;
 
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 import static com.teampregao.pregaobolsadevalores.manager.EntityManager.*;
@@ -31,7 +28,7 @@ public class EmpresasView {
     public TextField saldoAtualField;
     public TextField totalAcoesField;
     public Label empresaLabel;
-    public Pane graphicPane;
+    public VBox graphicPane;
     public TextField qntComprarAcaoField;
     public TextField valorComprarAcaoField;
     public Button comprarAcaoButton;
@@ -63,9 +60,10 @@ public class EmpresasView {
             for (Ativo ativo1 : ativos) {
                 if (ativo1.getEmpresa().equals(newValue)){
                     ativo = ativo1;
-                    saldoEAcaoRoutine();
                 }
             }
+            saldoEAcaoRoutine();
+            graphicRoutine();
         });
 
         investidor = EntityManager.refinedReadInvestidor((Investidor) Cache.getObject("user"));
@@ -111,6 +109,7 @@ public class EmpresasView {
         }));
     }
 
+
     public void verCarteiraButtonAction() {
     }
 
@@ -144,7 +143,7 @@ public class EmpresasView {
         }
 
         saldoEAcaoRoutine();
-
+        graphicRoutine();
     }
 
     public void venderAcaoButtonAction() {
@@ -155,6 +154,7 @@ public class EmpresasView {
         }
 
         saldoEAcaoRoutine();
+        graphicRoutine();
     }
 
     private void saldoEAcaoRoutine(){
@@ -169,4 +169,42 @@ public class EmpresasView {
         saldoAtualField.setText(String.valueOf(saldo));
         totalAcoesField.setText(String.valueOf(totalAcao));
     }
+    private void graphicRoutine() {
+        if (ativo == null){
+            return;
+        }
+        ListaEncadeada<Flutuacao> flutuacaoLista = readFlutuacao();
+
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+/*
+        yAxis.setLowerBound((double) corretora.getFaixa() /100 - 3);
+        yAxis.setUpperBound((double) corretora.getFaixa() /100 + 2);
+*/
+        // Criando o gráfico de linha
+        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle(ativo.getEmpresa());
+
+        // Criando uma série de dados
+        XYChart.Series<Number, Number> series = new XYChart.Series<>();
+        series.setName("Flutuação do Ativo");
+
+        AtomicInteger count = new AtomicInteger();
+        flutuacaoLista.forEach(flutuacao -> {
+            if (flutuacao.getAtivo().getId().getId() == ativo.getId().getId()){
+                System.out.println(flutuacao.getPrecoAtivo());
+                System.out.println(flutuacao.getFlutuacao());
+                series.getData().add(new XYChart.Data<>(count.get(), flutuacao.getPrecoAtivo()));
+                count.getAndIncrement();
+            }
+        });
+
+        // Adicionando a série ao gráfico
+        lineChart.getData().add(series);
+        lineChart.setPrefWidth(flutuacaoLista.getSize() * 50);
+        if (graphicPane.getChildren().size() == 1)
+            graphicPane.getChildren().remove(0);
+        graphicPane.getChildren().add(lineChart);
+    }
+
 }

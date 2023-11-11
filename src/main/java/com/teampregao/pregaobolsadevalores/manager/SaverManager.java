@@ -7,7 +7,7 @@ import java.io.*;
 
 public class SaverManager {
     private final String storagePath = "database.txt"; // Defina o caminho do arquivo de armazenamento.
-    private final int TAMANHO_CLASSES = 8;
+    private final int TAMANHO_CLASSES = 9;
     public final Fila<ListaEncadeada<Object>> insert;
 
     public void insert(String value, Type type) {
