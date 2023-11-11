@@ -20,12 +20,10 @@
                </font>
             </Label>
             <HBox prefHeight="40.0" prefWidth="318.0" spacing="10.0" VBox.vgrow="NEVER">
-               <FontIcon iconLiteral="fa-search" />
                <ComboBox fx:id="empresasComboBox" editable="true" prefHeight="33.0" prefWidth="242.0">
                </ComboBox>
             </HBox>
             <HBox prefHeight="40.0" prefWidth="318.0" spacing="10.0">
-               <FontIcon iconLiteral="fa-bank" />
                <Button fx:id="verCarteiraButton" mnemonicParsing="false" onAction="#verCarteiraButtonAction" prefHeight="40.0" prefWidth="151.0" text="VER CARTEIRA">
                   <font>
                      <Font size="14.0" />
@@ -45,7 +43,6 @@
                   </font>
                </Label>
                <TextField fx:id="saldoAtualField" prefHeight="32.0" prefWidth="93.0" style="-fx-border-color: #434343; -fx-border-width: 2;" />
-               <FontIcon iconLiteral="fa-eye" onMouseClicked="#saldoAtualView" />
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="318.0" spacing="10.0">
                <Label alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="185.0" text="AÇÕES ATUAIS:">
@@ -54,7 +51,6 @@
                   </font>
                </Label>
                <TextField fx:id="totalAcoesField" prefHeight="32.0" prefWidth="93.0" style="-fx-border-color: #434343; -fx-border-width: 2;" />
-               <FontIcon iconLiteral="fa-eye" onMouseClicked="#totalAcoesView" />
             </HBox>
          </VBox>
       </HBox>

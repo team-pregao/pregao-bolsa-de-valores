@@ -1,6 +1,7 @@
 package com.teampregao.pregaobolsadevalores.controllers;
 
 import com.teampregao.pregaobolsadevalores.Cache;
+import com.teampregao.pregaobolsadevalores.MainApp;
 import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
 import javafx.fxml.FXML;
@@ -108,6 +109,7 @@ public class EmpresasView {
 
 
     public void verCarteiraButtonAction() {
+        MainApp.openPane("carteira-view");
     }
 
     public void saldoAtualView(MouseEvent mouseEvent) {
