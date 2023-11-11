@@ -16,8 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teampregao.pregaobolsadevalores.controllers.CarteiraViewController">
-   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teampregao.pregaobolsadevalores.controllers.CarteiraViewController">   <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="154.0" prefWidth="1000.0">
          <VBox prefHeight="154.0" prefWidth="345.0" spacing="10.0">
             <padding>
@@ -96,7 +95,7 @@
             <content>
                <VBox fx:id="graphicPane" prefHeight="509.0" prefWidth="899.0">
                   <children>
-                     <TableView prefHeight="200.0" prefWidth="200.0">
+                     <TableView fx:id="carteiraTableView" prefHeight="200.0" prefWidth="200.0">
                        <columns>
                          <TableColumn prefWidth="75.0" text="C1" />
                          <TableColumn prefWidth="75.0" text="C2" />
