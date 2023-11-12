@@ -13,8 +13,8 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teampregao.pregaobolsadevalores.controllers.CadastroBancoDeDadosController">
    <HBox alignment="CENTER" layoutX="368.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-         <VBox prefHeight="800.0" prefWidth="400.0" />
-         <VBox alignment="TOP_CENTER" prefHeight="647.0" prefWidth="262.0">
+         <Region prefHeight="200.0" prefWidth="400.0" />
+         <VBox alignment="TOP_CENTER" prefHeight="647.0" prefWidth="270.0">
             <children>
                <Region prefHeight="110.0" prefWidth="262.0" />
                <ImageView fitHeight="127.0" fitWidth="262.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
@@ -48,7 +48,7 @@
          <VBox alignment="CENTER" prefHeight="800.0" prefWidth="400.0">
             <children>
                <Region prefHeight="582.0" prefWidth="380.0" />
-               <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="SIMULAÇÃO" textFill="WHITE">
+               <Button mnemonicParsing="false" onAction="#startSimulationAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="SIMULAÇÃO" textFill="WHITE">
                   <font>
                      <Font name="System Bold" size="18.0" />
                   </font>

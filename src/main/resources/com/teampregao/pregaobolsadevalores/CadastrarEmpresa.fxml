@@ -4,6 +4,7 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,86 +13,99 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/19" fx:controller="com.teampregao.pregaobolsadevalores.controllers.CadastroEmpresaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teampregao.pregaobolsadevalores.controllers.CadastroEmpresaController">
    <children>
-      <VBox layoutX="307.0" prefHeight="800.0" prefWidth="387.0">
+      <HBox alignment="CENTER" prefHeight="800.0" prefWidth="1000.0">
          <children>
-            <Region prefHeight="10.0" prefWidth="387.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="TOP_CENTER" prefHeight="807.0" prefWidth="350.0">
                <children>
-                  <Region prefHeight="200.0" prefWidth="200.0" />
-                  <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                  <Region prefHeight="200.0" prefWidth="200.0" />
+                  <Region prefHeight="701.0" prefWidth="211.0" />
+                  <Button mnemonicParsing="false" onAction="#backButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="19.0" />
+                     </font>
+                  </Button>
                </children>
-            </HBox>
-            <Region prefHeight="29.0" prefWidth="387.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR EMPRESA" textAlignment="CENTER" wrappingWidth="387.13427734375">
-               <font>
-                  <Font name="System Bold Italic" size="31.0" />
-               </font>
-            </Text>
-            <Region prefHeight="55.0" prefWidth="387.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NOME">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="nomeEmpresaField" alignment="CENTER" prefHeight="40.0" prefWidth="35.0" />
-            <Region prefHeight="45.0" prefWidth="387.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VALOR AÇÃO">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="txfValorAcao" alignment="CENTER" prefHeight="40.0" prefWidth="29.0" VBox.vgrow="SOMETIMES" />
-            <Region prefHeight="45.0" prefWidth="387.0" />
-            <MenuButton fx:id="tipoAcaoMenuButton" prefHeight="40.0" prefWidth="441.0" style="-fx-background-color: WHITE; -fx-border-width: 1px; -fx-border-color: GREY; -fx-border-radius: 5;" text="TIPO DA AÇÃO">
-               <items>
-                  <MenuItem onAction="#acaoPreferencialAction" text="AÇÃO PREFERÊNCIAL" />
-                  <MenuItem onAction="#acaoOrdinariaAction" text="AÇÃO ORDINÁRIA" />
-                  <MenuItem onAction="#FIIAction" text="FUNDO DE INVESTIMENTO IMOBILIÁRIO" />
-               </items>
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </MenuButton>
-            <Region prefHeight="45.0" prefWidth="387.0" />
-            <MenuButton fx:id="classesAcaoPreferencial" visible="false" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" prefWidth="441.0" style="-fx-background-color: WHITE; -fx-border-width: 1px; -fx-border-color: GREY; -fx-border-radius: 5;" text="TIPO DA AÇÃO">
-               <items>
-                  <MenuItem onAction="#choiceA" text="A" />
-                  <MenuItem onAction="#choiceB" text="B" />
-                  <MenuItem onAction="#choiceC" text="C" />
-                  <MenuItem onAction="#choiceD" text="D" />
-               </items>
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </MenuButton>
-            <Region fx:id="classesRegion" visible="false" prefHeight="0.0" prefWidth="387.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IPO">
-               <font>
-                  <Font name="System Bold Italic" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="txfIPO" alignment="CENTER" prefHeight="40.0" prefWidth="29.0" />
-            <Region prefHeight="45.0" prefWidth="387.0" />
-            <Button mnemonicParsing="false" onAction="#onActionCadastrarEmpresa" prefHeight="40.0" prefWidth="388.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="17.0" />
-               </font>
-            </Button>
+            </VBox>
+            <VBox prefHeight="800.0" prefWidth="387.0">
+               <children>
+                  <Region prefHeight="46.0" prefWidth="388.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@media/imagecomputador.png" />
+                           </image>
+                        </ImageView>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <Region prefHeight="15.0" prefWidth="388.0" />
+                  <Text fill="#293845" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRAR EMPRESA" textAlignment="CENTER" wrappingWidth="387.13427734375">
+                     <font>
+                        <Font name="System Bold Italic" size="31.0" />
+                     </font>
+                  </Text>
+                  <Region prefHeight="25.0" prefWidth="388.0" />
+                  <Text fill="#293845" strokeType="OUTSIDE" strokeWidth="0.0" text="NOME">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nomeEmpresaField" alignment="CENTER" prefHeight="40.0" prefWidth="35.0" />
+                  <Region prefHeight="45.0" prefWidth="387.0" />
+                  <Text fill="#293845" strokeType="OUTSIDE" strokeWidth="0.0" text="VALOR AÇÃO">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txfValorAcao" alignment="CENTER" prefHeight="40.0" prefWidth="29.0" VBox.vgrow="SOMETIMES" />
+                  <Region prefHeight="45.0" prefWidth="387.0" />
+                  <Text fill="#293845" strokeType="OUTSIDE" strokeWidth="0.0" text="TIPO AÇÃO">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <MenuButton fx:id="tipoAcaoMenuButton" prefHeight="40.0" prefWidth="441.0" style="-fx-background-color: WHITE; -fx-border-width: 1px; -fx-border-color: GREY; -fx-border-radius: 5;">
+                     <items>
+                        <MenuItem onAction="#acaoPreferencialAction" text="AÇÃO PREFERÊNCIAL" />
+                        <MenuItem onAction="#acaoOrdinariaAction" text="AÇÃO ORDINÁRIA" />
+                        <MenuItem onAction="#FIIAction" text="FUNDO DE INVESTIMENTO IMOBILIÁRIO" />
+                     </items>
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </MenuButton>
+                  <Region prefHeight="45.0" prefWidth="387.0" />
+                  <MenuButton fx:id="classesAcaoPreferencial" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" prefWidth="441.0" style="-fx-background-color: WHITE; -fx-border-width: 1px; -fx-border-color: GREY; -fx-border-radius: 5;" text="TIPO DA AÇÃO" visible="false">
+                     <items>
+                        <MenuItem onAction="#choiceA" text="A" />
+                        <MenuItem onAction="#choiceB" text="B" />
+                        <MenuItem onAction="#choiceC" text="C" />
+                        <MenuItem onAction="#choiceD" text="D" />
+                     </items>
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </MenuButton>
+                  <Region fx:id="classesRegion" prefHeight="0.0" prefWidth="387.0" visible="false" />
+                  <Text fill="#293845" strokeType="OUTSIDE" strokeWidth="0.0" text="IPO">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txfIPO" alignment="CENTER" prefHeight="40.0" prefWidth="29.0" />
+                  <Region prefHeight="45.0" prefWidth="387.0" />
+                  <Button mnemonicParsing="false" onAction="#onActionCadastrarEmpresa" prefHeight="40.0" prefWidth="388.0" style="-fx-background-color: #1aae9f;" text="CADASTRAR" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <Region prefHeight="800.0" prefWidth="350.0" />
          </children>
-      </VBox>
-      <VBox layoutX="27.0" layoutY="-2.0" prefHeight="807.0" prefWidth="211.0">
-         <children>
-            <Region prefHeight="701.0" prefWidth="211.0" />
-            <Button mnemonicParsing="false" onAction="#backButtonAction" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="19.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

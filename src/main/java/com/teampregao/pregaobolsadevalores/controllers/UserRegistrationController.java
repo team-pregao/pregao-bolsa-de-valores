@@ -78,4 +78,8 @@ public class UserRegistrationController {
             MainApp.openPane("empresas-view");
     }
 
+    public void backButtonAction(ActionEvent event) {
+        MainApp.openPane("CadastroBancoDeDados");
+    }
+
 }
