@@ -61,7 +61,7 @@
                   </font>
                </Label>
                <TextField fx:id="saldoAtualField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
-               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#saldoAtualView">
                   <image>
                      <Image url="@media/imageolho.png" />
                   </image>
@@ -74,7 +74,7 @@
                   </font>
                </Label>
                <TextField fx:id="totalAcoesField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
-               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#totalAcoesView">
                   <image>
                      <Image url="@media/imageolho.png" />
                   </image>
