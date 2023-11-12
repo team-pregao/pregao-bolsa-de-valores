@@ -38,24 +38,23 @@ public class CadastroEmpresaController {
             int IPO = Integer.parseInt(txfIPO.getText());
 
             SaverManager saverManager = new SaverManager();
-
+            Ativo ativo = null;
             switch (selection) {
                 case 1 -> {
                     System.out.println("1");
-                    acaoPreferencial = new AcaoPreferencial(new Id(Type.ATIVO), nome, valorAcao, charClasse);
-                    saverManager.insert(EntityManager.lineAtivo(acaoPreferencial), acaoPreferencial.getId().getType());
+                    ativo = new AcaoPreferencial(new Id(Type.ATIVO), nome, valorAcao, charClasse);
                 }
                 case 2 -> {
                     System.out.println("2");
-                    saverManager.insert(EntityManager.lineAtivo(acaoOrdinaria), acaoOrdinaria.getId().getType());
-                    acaoOrdinaria = new AcaoOrdinaria(new Id(Type.ATIVO), nome, valorAcao);
+                    ativo = new AcaoOrdinaria(new Id(Type.ATIVO), nome, valorAcao);
                 }
                 case 3 -> {
                     System.out.println("3");
-                    fundoInvestimentoImobiliario = new FundoInvestimentoImobiliario(new Id(Type.ATIVO), nome, valorAcao);
-                    saverManager.insert(EntityManager.lineAtivo(fundoInvestimentoImobiliario), fundoInvestimentoImobiliario.getId().getType());
+                    ativo = new FundoInvestimentoImobiliario(new Id(Type.ATIVO), nome, valorAcao);
                 }
             }
+
+            saverManager.insert(EntityManager.lineAtivo(ativo), Type.ATIVO);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("SUCESSO");
@@ -69,6 +68,7 @@ public class CadastroEmpresaController {
             alert.setHeaderText("Erro ao cadastar");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
+            throw e;
         }
 
     }

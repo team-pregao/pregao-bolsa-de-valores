@@ -1,104 +1,120 @@
 package com.teampregao.pregaobolsadevalores.ed;
 
-public class Mapa<K, V>{
-    No head;
-    int size;
+public class Mapa<K extends Comparable<K>, V> {
+    private Node root;
+    private int size;
 
-    public class No{
-        V value;
-        K key;
-        No no;
-
-        public No(K key, V value) {
-            this.value = value;
-            this.key = key;
-            this.no = null;
-        }
-
-        public boolean next(){
-            return no != null;
-        }
-        
+    public void put(K key, V value) {
+        root = put(root, key, value);
     }
 
-    private void put(No newNo, No no){
-        if (no.no == null || no.no.key.equals(newNo.key) ) {
-            if (no.no == null){
-                no.no = newNo;
-            } else {
-                no.no.value = newNo.value;
-            }
+    private Node put(Node node, K key, V value) {
+        if (node == null) {
+            size++;
+            return new Node(key, value);
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            node.left = put(node.left, key, value);
+        } else if (cmp > 0) {
+            node.right = put(node.right, key, value);
         } else {
-            put(newNo, no.no);
+            node.value = value;
         }
-    }
 
-    public void put(K key, V value){
-        if (head == null){
-            head = new No(key, value);
-            size += 1;
-            return;
-        }
-        put(new No(key, value), head);
-        size += 1;
+        return node;
     }
 
     public V get(K key) {
-        No no = head;
-        while (no != null){
-            if (key.equals(no.key)){
-                return no.value;
-            } else {
-                no = no.no;
-            }
-        }
-        return null;
+        return get(root, key);
     }
 
-    public K getKey(V value) {
-        No no = head;
-        while (no != null){
-            if (no.value.equals(value)){
-                return no.key;
-            } else {
-                no = no.no;
-            }
+    private V get(Node node, K key) {
+        if (node == null) {
+            return null;
         }
-        return null;
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            return get(node.left, key);
+        } else if (cmp > 0) {
+            return get(node.right, key);
+        } else {
+            return node.value;
+        }
     }
 
-    public void remove(K key){
-        if (key.equals(head.key)) {
-            head = head.no;
-            return;
-        }
-        No no = head;
-        while (no.no != null){
-            if (no.no.key.equals(key)){
-                No temp = no.no;
-                no.no = no.no.no;
-                temp.no = null;
-            } else {
-                no = no.no;
-            }
-        }
-        size -= 1;
+    public void remove(K key) {
+        root = remove(root, key);
     }
 
-    public void removeByValue(V value){
-        remove(getKey(value));
+    private Node remove(Node node, K key) {
+        if (node == null) {
+            return null;
+        }
+
+        int cmp = key.compareTo(node.key);
+
+        if (cmp < 0) {
+            node.left = remove(node.left, key);
+        } else if (cmp > 0) {
+            node.right = remove(node.right, key);
+        } else {
+            size--;
+            if (node.right == null) {
+                return node.left;
+            } else if (node.left == null) {
+                return node.right;
+            } else {
+                Node min = findMin(node.right);
+                node.key = min.key;
+                node.value = min.value;
+                node.right = remove(node.right, min.key);
+            }
+        }
+
+        return node;
+    }
+
+    private Node findMin(Node node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    public int size() {
+        return size;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("{");
-        No no = head;
-        while (no != null){
-            stringBuilder.append(" ").append(no.key).append(": ").append(get(no.key));
-            no = no.no;
-        }
+        toString(root, stringBuilder);
         stringBuilder.append(" }");
         return stringBuilder.toString();
     }
 
+    private void toString(Node node, StringBuilder stringBuilder) {
+        if (node != null) {
+            toString(node.left, stringBuilder);
+            stringBuilder.append(" ").append(node.key).append(": ").append(node.value);
+            toString(node.right, stringBuilder);
+        }
+    }
+
+    private class Node {
+        K key;
+        V value;
+        Node left, right;
+
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+            this.left = this.right = null;
+        }
+    }
 }

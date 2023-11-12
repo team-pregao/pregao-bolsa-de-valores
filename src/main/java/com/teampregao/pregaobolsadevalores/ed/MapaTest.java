@@ -67,7 +67,5 @@ class MapaTest {
         mapa.put("Prova 4", 90.0);
 
         System.out.println(mapa);
-
-        assertEquals(mapa.getKey(90.0), "Prova 4");
     }
 }

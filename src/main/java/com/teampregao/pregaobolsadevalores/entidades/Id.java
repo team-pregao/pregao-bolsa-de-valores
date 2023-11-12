@@ -4,7 +4,7 @@ import com.teampregao.pregaobolsadevalores.manager.*;
 
 import java.util.Objects;
 
-public class Id {
+public class Id implements Comparable<Id> {
     private final int id;
     private final Type type;
 
@@ -50,5 +50,16 @@ public class Id {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getType());
+    }
+
+    @Override
+    public int compareTo(Id o) {
+        int idComparison = Integer.compare(this.getId(), o.getId());
+
+        if (idComparison != 0) {
+            return idComparison;
+        }
+
+        return this.getType().compareTo(o.getType());
     }
 }
