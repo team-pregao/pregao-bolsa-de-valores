@@ -1,3 +1,4 @@
+package com.teampregao.pregaobolsadevalores.ed;
 public class BubbleSort {
   
     static void bubbleSort(int[] array) {
@@ -20,3 +21,4 @@ public class BubbleSort {
         }
         System.out.println();
     }
+}
