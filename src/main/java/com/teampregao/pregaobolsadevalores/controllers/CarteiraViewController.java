@@ -1,6 +1,7 @@
 package com.teampregao.pregaobolsadevalores.controllers;
 
 import com.teampregao.pregaobolsadevalores.Cache;
+import com.teampregao.pregaobolsadevalores.MainApp;
 import com.teampregao.pregaobolsadevalores.entidades.Carteira;
 import com.teampregao.pregaobolsadevalores.entidades.Historico;
 import com.teampregao.pregaobolsadevalores.entidades.Investidor;
@@ -71,7 +72,7 @@ public class CarteiraViewController {
 
     @FXML
     void verAcoesButtonAction(ActionEvent event) {
-
+        MainApp.openPane("empresas-view");
     }
 
     public static class HistoricoTable {

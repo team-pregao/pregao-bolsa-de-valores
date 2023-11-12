@@ -33,6 +33,7 @@ public class EmpresasView {
     public TextField qntVenderAcaoField;
     public TextField valorVenderAcaoField;
     public Button venderAcaoButton;
+    public ScrollPane scrollGraphic;
 
     private double saldo;
     private double totalAcao;
@@ -197,7 +198,7 @@ public class EmpresasView {
         saldoAtualField.setText(String.valueOf(saldo));
         totalAcoesField.setText(String.valueOf(totalAcao));
     }
-    private void graphicRoutine() {
+    public void graphicRoutine() {
         if (ativo == null){
             return;
         }
@@ -230,10 +231,9 @@ public class EmpresasView {
 
         // Adicionando a série ao gráfico
         lineChart.getData().add(series);
-        lineChart.setPrefWidth(flutuacaoLista.getSize() * 50);
+        lineChart.setMinWidth(scrollGraphic.getWidth() - 30);
         if (graphicPane.getChildren().size() == 1)
             graphicPane.getChildren().remove(0);
         graphicPane.getChildren().add(lineChart);
     }
-
 }

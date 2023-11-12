@@ -23,8 +23,9 @@ public class MainApp extends Application {
         Parent root = loadFXML(fxml);
         Scene scene = new Scene(root);
         stage.setTitle(title);
+        stage.setWidth(stage.getWidth());
+        stage.setHeight(stage.getHeight());
         stage.setScene(scene);
-        stage.setMaximized(true);
         stage.show();
     }
 
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage s) throws IOException {
         stage=s;
+        stage.setMaximized(true);
         setRoot(root,"Simulador Pregao");
     }
 

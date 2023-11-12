@@ -40,15 +40,21 @@ public class CadastroEmpresaController {
             SaverManager saverManager = new SaverManager();
 
             switch (selection) {
-                case 1:
+                case 1 -> {
+                    System.out.println("1");
                     acaoPreferencial = new AcaoPreferencial(new Id(Type.ATIVO), nome, valorAcao, charClasse);
                     saverManager.insert(EntityManager.lineAtivo(acaoPreferencial), acaoPreferencial.getId().getType());
-                case 2:
-                    acaoOrdinaria = new AcaoOrdinaria(new Id(Type.ATIVO), nome, valorAcao);
+                }
+                case 2 -> {
+                    System.out.println("2");
                     saverManager.insert(EntityManager.lineAtivo(acaoOrdinaria), acaoOrdinaria.getId().getType());
-                case 3:
+                    acaoOrdinaria = new AcaoOrdinaria(new Id(Type.ATIVO), nome, valorAcao);
+                }
+                case 3 -> {
+                    System.out.println("3");
                     fundoInvestimentoImobiliario = new FundoInvestimentoImobiliario(new Id(Type.ATIVO), nome, valorAcao);
                     saverManager.insert(EntityManager.lineAtivo(fundoInvestimentoImobiliario), fundoInvestimentoImobiliario.getId().getType());
+                }
             }
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
