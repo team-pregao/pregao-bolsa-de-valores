@@ -4,6 +4,8 @@ import com.teampregao.pregaobolsadevalores.Cache;
 import com.teampregao.pregaobolsadevalores.MainApp;
 import com.teampregao.pregaobolsadevalores.ed.ListaEncadeada;
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -235,5 +237,9 @@ public class EmpresasView {
         if (graphicPane.getChildren().size() == 1)
             graphicPane.getChildren().remove(0);
         graphicPane.getChildren().add(lineChart);
+    }
+
+    public void backButtonAction(ActionEvent event) {
+        MainApp.openPane("UserRegistration");
     }
 }

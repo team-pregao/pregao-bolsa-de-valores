@@ -165,4 +165,8 @@ public class CarteiraViewController {
         }
     }
 
+    public void backButtonAction(ActionEvent event) {
+        MainApp.openPane("UserRegistration");
+    }
+
 }

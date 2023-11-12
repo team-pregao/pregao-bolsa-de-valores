@@ -81,6 +81,16 @@
                   </image>
                </ImageView>
             </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="338.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backButtonAction" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="40.0" prefWidth="36.0" />
+               </children>
+            </HBox>
          </VBox>
       </HBox>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">

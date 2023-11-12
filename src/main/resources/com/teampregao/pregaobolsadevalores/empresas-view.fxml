@@ -61,7 +61,7 @@
                   </font>
                </Label>
                <TextField fx:id="saldoAtualField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
-               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#saldoAtualView">
+               <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#saldoAtualView" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@media/imageolho.png" />
                   </image>
@@ -74,11 +74,21 @@
                   </font>
                </Label>
                <TextField fx:id="totalAcoesField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
-               <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#totalAcoesView">
+               <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#totalAcoesView" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@media/imageolho.png" />
                   </image>
                </ImageView>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="338.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backButtonAction" prefHeight="32.0" prefWidth="94.0" style="-fx-background-color: #6558f5;" text="VOLTAR" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Region prefHeight="40.0" prefWidth="36.0" />
+               </children>
             </HBox>
          </VBox>
       </HBox>
@@ -96,7 +106,7 @@
                <VBox fx:id="graphicPane" prefHeight="325.0" prefWidth="899.0" />
             </content>
          </ScrollPane>
-         <HBox alignment="CENTER" prefHeight="290.0" prefWidth="899.0" VBox.vgrow="ALWAYS">
+         <HBox alignment="CENTER" prefHeight="290.0" prefWidth="959.0" VBox.vgrow="ALWAYS">
             <VBox prefHeight="229.0" prefWidth="320.0" spacing="5.0">
                <Label prefHeight="32.0" prefWidth="295.0" text="SELECIONE UMA QUANTIDADE DE AÇÕES:" textFill="#293845">
                   <font>
