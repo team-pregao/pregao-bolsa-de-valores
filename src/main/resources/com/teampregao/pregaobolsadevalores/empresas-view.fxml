@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teampregao.pregaobolsadevalores.controllers.EmpresasView">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f9fa;" xmlns="http://javafx.com/javafx/19" fx:controller="com.teampregao.pregaobolsadevalores.controllers.EmpresasView">
    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="154.0" prefWidth="1000.0">
          <VBox prefHeight="154.0" prefWidth="345.0" spacing="10.0">
@@ -60,7 +62,7 @@
                      <Font name="System Bold" size="18.0" />
                   </font>
                </Label>
-               <TextField fx:id="saldoAtualField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
+               <TextField fx:id="saldoAtualField" editable="false" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
                <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#saldoAtualView" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@media/imageolho.png" />
@@ -73,7 +75,7 @@
                      <Font name="System Bold" size="18.0" />
                   </font>
                </Label>
-               <TextField fx:id="totalAcoesField" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
+               <TextField fx:id="totalAcoesField" editable="false" prefHeight="32.0" prefWidth="94.0" style="-fx-border-color: #b9c0c7; -fx-border-width: 2;" />
                <ImageView fitHeight="25.0" fitWidth="25.0" onMouseClicked="#totalAcoesView" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@media/imageolho.png" />
@@ -94,18 +96,79 @@
       </HBox>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
          <padding>
-            <Insets bottom="10.0" left="50.0" right="50.0" />
+            <Insets bottom="10.0" />
          </padding>
          <Label fx:id="empresaLabel" alignment="CENTER" prefHeight="52.0" prefWidth="366.0">
             <font>
                <Font name="System Bold" size="36.0" />
             </font>
          </Label>
-         <ScrollPane fx:id="scrollGraphic">
-            <content>
-               <VBox fx:id="graphicPane" prefHeight="325.0" prefWidth="899.0" />
-            </content>
-         </ScrollPane>
+         <HBox alignment="CENTER" spacing="15.0">
+            <children>
+               <VBox maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="226.0" text="TOP 5 ATIVOS" textFill="#293845" VBox.vgrow="ALWAYS">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Label>
+                     <TableView fx:id="ativosCarosTableView" prefHeight="200.0" prefWidth="200.0">
+                       <columns>
+                         <TableColumn fx:id="tikerColumnC" editable="false" prefWidth="75.0" text="TIKER" />
+                         <TableColumn fx:id="precoColumnC" prefWidth="75.0" text="PREÇO" />
+                       </columns>
+                        <columnResizePolicy>
+                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                     </TableView>
+                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="226.0" text="MAIS CAROS" textFill="#293845">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+                  <padding>
+                     <Insets left="5.0" right="5.0" />
+                  </padding>
+               </VBox>
+               <Region prefHeight="260.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               <ScrollPane fx:id="scrollGraphic" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="261.0" prefWidth="606.0">
+                  <content>
+                     <VBox fx:id="graphicPane" prefHeight="250.0" prefWidth="606.0" />
+                  </content>
+               </ScrollPane>
+               <Region prefHeight="260.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="226.0" text="TOP 5 ATIVOS" textFill="#293845">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Label>
+                     <TableView fx:id="ativosBaratosTableView" maxWidth="300.0" prefHeight="200.0" prefWidth="200.0">
+                        <columns>
+                           <TableColumn fx:id="tikerColumnB" editable="false" prefWidth="75.0" text="TIKER" />
+                           <TableColumn fx:id="precoColumnB" prefWidth="75.0" text="PREÇO" />
+                        </columns>
+                        <columnResizePolicy>
+                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                        </columnResizePolicy>
+                     </TableView>
+                     <Label alignment="CENTER" prefHeight="32.0" prefWidth="226.0" text="MAIS BARATOS" textFill="#293845">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+                  <padding>
+                     <Insets left="5.0" right="5.0" />
+                  </padding>
+               </VBox>
+            </children>
+            <padding>
+               <Insets left="15.0" right="15.0" />
+            </padding>
+         </HBox>
          <HBox alignment="CENTER" prefHeight="290.0" prefWidth="959.0" VBox.vgrow="ALWAYS">
             <VBox prefHeight="229.0" prefWidth="320.0" spacing="5.0">
                <Label prefHeight="32.0" prefWidth="295.0" text="SELECIONE UMA QUANTIDADE DE AÇÕES:" textFill="#293845">

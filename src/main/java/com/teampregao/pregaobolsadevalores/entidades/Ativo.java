@@ -2,7 +2,7 @@ package com.teampregao.pregaobolsadevalores.entidades;
 
 import com.teampregao.pregaobolsadevalores.manager.EntityManager;
 
-public abstract class Ativo {
+public abstract class Ativo implements Comparable<Ativo> {
     protected final Id id;
     protected final String empresa;
     protected double valorAtual;
@@ -28,5 +28,10 @@ public abstract class Ativo {
 
     public void setValorAtual(double valorAtual) {
         this.valorAtual = valorAtual;
+    }
+
+    @Override
+    public int compareTo(Ativo o) {
+        return Double.compare(o.getValorAtual(), getValorAtual());
     }
 }

@@ -1,8 +1,7 @@
 package com.teampregao.pregaobolsadevalores.ed;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Spliterator;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class ListaEncadeada<T> implements Iterable<T> {
@@ -107,7 +106,7 @@ public class ListaEncadeada<T> implements Iterable<T> {
         size += 1;
     }
 
-    public T get(int index) {
+        public T get(int index) {
         No no = head;
         int count = 0;
         while (no != null){
@@ -164,6 +163,25 @@ public class ListaEncadeada<T> implements Iterable<T> {
 
     public int getSize() {
         return size;
+    }
+    public T[] toArray(T[] array) {
+        if (array.length < size) {
+            array = (T[]) Array.newInstance(array.getClass().getComponentType(), size);
+        }
+
+        No currentNo = head;
+        int i = 0;
+        while (currentNo != null) {
+            array[i] = currentNo.dado;
+            currentNo = currentNo.no;
+            i++;
+        }
+
+        for (; i < array.length; i++) {
+            array[i] = null;
+        }
+
+        return array;
     }
 
     @Override
