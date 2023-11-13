@@ -36,20 +36,25 @@ A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de v
 1. **Clone o Repositório:**
    - Abra o terminal e execute o seguinte comando para clonar o repositório:
         ```` bash
-     git clone https://github.com/team-pregao/pregao-bolsa-de-valores
+         git clone https://github.com/team-pregao/pregao-bolsa-de-valores
         ````
         
 2. **Acesse a Pasta do Repositório:**
    - Navegue até a pasta recém-clonada usando o comando:
         ```` bash
-      cd pregao-bolsa-de-valores
+          cd pregao-bolsa-de-valores
         ````
 
 3. **Instale as Dependências e Execute o Aplicativo:**
    - Use os seguintes comandos para instalar as dependências e iniciar o simulador:
         ```` bash
-     ./mvnw install
-     ./mvnw javafx:run
+         ./mvnw install
+         ./mvnw javafx:run
+        ````
+    - Ou, no Windows
+        ```` bash
+         .\mvnw install
+         .\mvnw javafx:run
         ````
    
 4. **Explore o Simulador:**
