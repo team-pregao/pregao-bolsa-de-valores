@@ -24,8 +24,42 @@ A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de v
 
     Custodiante: Responsável pela guarda e garantia dos ativos negociados.
 
+### 🛠️ Ferramentas Utilizadas
+
+- Apache Maven
+- Java
+- JavaFX
+- POO
+
+### 🚀 Instruções de Instalção
+
+1. **Clone o Repositório:**
+   - Abra o terminal e execute o seguinte comando para clonar o repositório:
+        ```` bash
+     git clone https://github.com/team-pregao/pregao-bolsa-de-valores
+        ````
+        
+2. **Acesse a Pasta do Repositório:**
+   - Navegue até a pasta recém-clonada usando o comando:
+        ```` bash
+      cd pregao-bolsa-de-valores
+        ````
+
+3. **Instale as Dependências e Execute o Aplicativo:
+   - Use os seguintes comandos para instalar as dependências e iniciar o simulador:
+        ```` bash
+     ./mvnw install
+     ./mvnw javafx:run
+        ````
+   
+4. **Explore o Simulador:**
+   - Após a conclusão dos comandos acima, o simulador de pregão será iniciado. Explore a interface conforme necessário para entender o funcionamento e as funcionalidades
+
 ### 💻 Protótipos da Interface
 [Link para projeto Whimscal](https://whimsical.com/pregaobolsa-TKJB2CDY9S8wpFh9HEbq84)
+
+### 🎲 Diagrama do Fluxo de Dados
+[Link para o diagrama](https://app.diagrams.net/#G1ujrKw8xhOq00qlyvaPZOp2jNMal7o6Lv)
 
 ### 👥 Colaboradores
 

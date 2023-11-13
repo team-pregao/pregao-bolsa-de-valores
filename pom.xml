@@ -81,7 +81,7 @@
     </dependencies>
 
     <build>
-        <finalName>Simulador Pregao</finalName>
+        <finalName>simulador-pregao</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
