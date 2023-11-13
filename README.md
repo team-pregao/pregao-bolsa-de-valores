@@ -45,7 +45,7 @@ A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de v
       cd pregao-bolsa-de-valores
         ````
 
-3. **Instale as Dependências e Execute o Aplicativo:
+3. **Instale as Dependências e Execute o Aplicativo:**
    - Use os seguintes comandos para instalar as dependências e iniciar o simulador:
         ```` bash
      ./mvnw install
