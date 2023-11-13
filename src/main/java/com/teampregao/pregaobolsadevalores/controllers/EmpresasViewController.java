@@ -19,16 +19,14 @@ import javafx.scene.input.MouseEvent;
 
 import com.teampregao.pregaobolsadevalores.entidades.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 import static com.teampregao.pregaobolsadevalores.manager.EntityManager.*;
 
-public class EmpresasView {
+public class EmpresasViewController {
     public Label corretoraLabel;
     public ComboBox<String> empresasComboBox;
     public Button verCarteiraButton;
@@ -150,8 +148,8 @@ public class EmpresasView {
             System.out.println(ativoBarato.getEmpresa());
         }
 
-        ativosBaratosTableView.setItems(ativosBaratosList);
-        ativosCarosTableView.setItems(ativosCarosList);
+        ativosBaratosTableView.setItems(ativosCarosList);
+        ativosCarosTableView.setItems(ativosBaratosList);
     }
 
     public void comprarAcaoButtonAction() {

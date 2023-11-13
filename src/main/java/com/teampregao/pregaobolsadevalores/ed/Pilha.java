@@ -18,7 +18,8 @@ public class Pilha<T> {
     public int size() {
         return tamanho;
     }
-    
+
+    //Adiciona um novo elemento ao topo da pilha
     public void push(T value) {
         No<T> novoNo = new No<>(value);
         if (isEmpty()) {
@@ -30,6 +31,7 @@ public class Pilha<T> {
         tamanho++;
     }
 
+    //Remove e retorna o elemento do topo da pilha
     public T pop() {
         if (isEmpty()) {
             throw new EmptyStackException();
@@ -40,6 +42,7 @@ public class Pilha<T> {
         return value;
     }
 
+    //Retorna sem remover o primeiro elemento da pilha
     public T peek() {
         if (isEmpty()) {
             throw new EmptyStackException();

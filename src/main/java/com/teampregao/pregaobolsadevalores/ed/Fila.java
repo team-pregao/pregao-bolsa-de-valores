@@ -9,7 +9,7 @@ public class Fila<T> implements Iterable<T> {
     private No<T> front; // Referência para o elemento da frente da fila
     private No<T> rear;  // Referência para o elemento de trás da fila
     private int size;      // Tamanho da fila
-
+    
     // Classe interna para representar um nó na fila
     private static class No<T> {
         T data;           // Dados armazenados no nó

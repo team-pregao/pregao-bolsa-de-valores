@@ -86,6 +86,7 @@ public class ListaEncadeada<T> implements Iterable<T> {
         }
     }
 
+    //Insere no final
     public void add(T dado){
         if (head == null){
             head = new No(dado);
@@ -95,7 +96,7 @@ public class ListaEncadeada<T> implements Iterable<T> {
         add(new No(dado), head);
         size += 1;
     }
-
+    // Insere em uma posição específica
     public void add(int index, T dado){
         if (head == null || index == 0){
             head = new No(dado);
@@ -106,7 +107,7 @@ public class ListaEncadeada<T> implements Iterable<T> {
         size += 1;
     }
 
-        public T get(int index) {
+    public T get(int index) {
         No no = head;
         int count = 0;
         while (no != null){

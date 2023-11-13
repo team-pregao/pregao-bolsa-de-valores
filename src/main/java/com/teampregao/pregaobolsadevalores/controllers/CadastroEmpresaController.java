@@ -7,7 +7,6 @@ import com.teampregao.pregaobolsadevalores.manager.SaverManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -23,10 +22,6 @@ public class CadastroEmpresaController {
 
     @FXML
     private TextField txfIPO;
-
-    private AcaoOrdinaria acaoOrdinaria;
-    private AcaoPreferencial acaoPreferencial;
-    private FundoInvestimentoImobiliario fundoInvestimentoImobiliario;
 
     private int selection;
     private char charClasse;

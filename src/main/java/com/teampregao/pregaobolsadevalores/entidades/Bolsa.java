@@ -15,35 +15,7 @@ public class Bolsa {
     public Bolsa(Id id, String nome) {
         this.id = id;
         this.nome = nome;
-        this.livroDeOfertas = new Mapa<>();/*
-        EntityManager.readAtivo().iterator().forEachRemaining(ativo -> {
-            Mapa<String, Pilha<Historico>> pagina = new Mapa<>();
-            Pilha<Historico> vendas = new Pilha<>();
-            Pilha<Historico> compras = new Pilha<>();
-
-            SaverManager saverManager = new SaverManager();
-            Historico pedido = new Historico();
-*
-            Corretora pong = new Corretora(new Id(Type.CORRETORA), "pong", this);
-            saverManager.insert(EntityManager.lineCorretora(pong), pong.getId().getType());
-            ping.comprarAcao(ativo, 1000, pong, true);
-
-            pedido.setInvestidor(ping);
-            pedido.setValor(10000.0);
-            pedido.setAtivo(ativo);
-            pedido.setQuantidade(1000);
-            pedido.setTipo(1);
-            pedido.setCorretora(pong);
-            
-            vendas.push(pedido);
-            
-            pedido.setTipo(0);
-            
-            compras.push(pedido);
-            
-            pagina.put("venda", vendas);
-            pagina.put("compra", compras);
-            livroDeOfertas.put(ativo.getId(), pagina);*/
+        this.livroDeOfertas = new Mapa<>();
     }
 
     public String getNome() {
