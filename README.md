@@ -8,8 +8,13 @@
 
 </div>
 
-## 💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
+<br>
 
+<div align="center">
+    <h1>
+        💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
+    </h1> 
+</div>
 
 ### 📝 Sobre o Projeto
 
