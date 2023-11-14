@@ -2,7 +2,11 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=5F9EA0&size=35&center=true&vCenter=true&width=1000&lines=Seja+Bem+Vindo+ao+nosso+Projeto)](https://git.io/typing-svg)
 
+<div align="center">
 
+![simulador pregap](https://cdn.pixabay.com/animation/2023/06/13/15/13/15-13-13-522_256.gif)
+
+</div>
 
 ## 💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
 
