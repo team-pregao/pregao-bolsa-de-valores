@@ -12,7 +12,7 @@
 
 <div align="center">
     <h1>
-        💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
+         Projeto Simulador de Pregão da Bolsa de Valores 
     </h1> 
 </div>
 
