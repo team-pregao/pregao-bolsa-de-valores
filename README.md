@@ -1,6 +1,6 @@
-<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=008080&height=120&section=header"/>
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=5F9EA0&height=120&section=header"/>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=008080&size=35&center=true&vCenter=true&width=1000&lines=Seja+Bem+Vindo+ao+nosso+Projeto)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=5F9EA0&size=35&center=true&vCenter=true&width=1000&lines=Seja+Bem+Vindo+ao+nosso+Projeto)](https://git.io/typing-svg)
 
 
 
@@ -102,4 +102,4 @@ A aplicação permite o cadastro de diversas entidades relacionadas a bolsa de v
 
 <br>
 
-<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=008080&height=120&section=footer"/>
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=5F9EA0&height=120&section=footer"/>
