@@ -4,7 +4,7 @@
 
 
 
-# 💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
+## 💰 Projeto Simulador de Pregão da Bolsa de Valores 💰
 
 
 ### 📝 Sobre o Projeto
